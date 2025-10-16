@@ -1,0 +1,97 @@
+<div class="interviews-container">
+  <!-- Header -->
+  <div class="interviews-header">
+    <h1>Interviews</h1>
+  </div>
+
+  <!-- Main Layout Container -->
+  <div class="main-layout">
+    <!-- Left Panel - Interview List -->
+    <div class="interviews-list-panel">
+      <div class="tabs">
+        <button 
+          class="tab" 
+          [class.active]="selectedTab === 'upcoming'"
+          (click)="onTabChange('upcoming')">
+          Upcoming (1)
+        </button>
+        <button 
+          class="tab" 
+          [class.active]="selectedTab === 'pending'"
+          (click)="onTabChange('pending')">
+          Pending (2)
+        </button>
+        <button 
+          class="tab" 
+          [class.active]="selectedTab === 'past'"
+          (click)="onTabChange('past')">
+          Past (0)
+        </button>
+      </div>
+      
+      <div class="interview-item" 
+           *ngFor="let interview of interviews"
+           [class.selected]="interview.selected"
+           (click)="onInterviewSelect(interview)">
+        <div class="interview-content">
+          <h3 class="interview-title">{{ interview.title }}</h3>
+          <div class="candidate-info">
+            <span class="person-icon">👤</span>
+            <span class="candidate-name">{{ interview.candidateName }}</span>
+          </div>
+          <div class="time-info">
+            <span class="calendar-icon">📅</span>
+            <span class="date-time">{{ interview.date }} | {{ interview.time }}</span>
+          </div>
+          <div class="role-info">{{ interview.role }}</div>
+        </div>
+        <div class="interview-type-icon">
+          <div class="phone-icon">📞</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel - Interview Details -->
+    <div class="interview-details-panel">
+      <div class="details-container">
+        <h2 class="interview-detail-title">{{ selectedInterview.title }}</h2>
+        <div class="proposed-time-info">
+          <span class="calendar-icon">📅</span>
+          <span class="time-text">{{ selectedInterview.proposedTime }}</span>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn-reschedule">Reschedule</button>
+          <button class="btn-cancel">Cancel</button>
+        </div>
+        
+        <div class="notes-section">
+          <label class="notes-label">Take Notes</label>
+          <div class="notes-container">
+            <textarea 
+              class="notes-textarea"
+              [(ngModel)]="selectedInterview.notes"
+              (ngModelChange)="onNotesChange($event)">
+            </textarea>
+            
+            <div class="formatting-toolbar">
+              <button class="format-btn" title="Bold">B</button>
+              <button class="format-btn" title="Italic">I</button>
+              <button class="format-btn" title="Underline">U</button>
+              <button class="format-btn" title="Strikethrough">S</button>
+              <button class="format-btn" title="Bullet List">•</button>
+              <button class="format-btn" title="Numbered List">1.</button>
+              <button class="format-btn" title="Align Left">⬅</button>
+              <button class="format-btn" title="Align Center">⬆</button>
+              <button class="format-btn" title="Align Right">➡</button>
+              <button class="format-btn" title="Justify">⬇</button>
+              <button class="format-btn" title="Subscript">T₂</button>
+              <button class="format-btn" title="Superscript">T²</button>
+              <button class="format-btn" title="Clear Formatting">🧹</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

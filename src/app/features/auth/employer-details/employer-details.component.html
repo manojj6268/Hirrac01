@@ -1,0 +1,33 @@
+<div class="auth-page">
+  <div class="form-card">
+    <h1 class="form-title">Employer Details</h1>
+
+    <form [formGroup]="detailsForm" (ngSubmit)="onSave()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="companyName">Company Name</label>
+          <input type="text" id="companyName" placeholder="Enter company name" formControlName="companyName" />
+        </div>
+
+        <div class="form-group">
+          <label for="industryType">Industry Type</label>
+          <input type="text" id="industryType" placeholder="Enter industry type" formControlName="industryType" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contactEmail">Contact Email</label>
+          <input type="email" id="contactEmail" placeholder="Enter contact email" formControlName="contactEmail" />
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="Enter location" formControlName="location" />
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+</div>

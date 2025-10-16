@@ -1,0 +1,230 @@
+// ----------- (your original styles) -------------
+// paste your entire original SCSS here (as provided).
+// I'll include them verbatim, then add the new styles below.
+
+/* === BEGIN ORIGINAL STYLES (unchanged) === */
+.jobs-container {
+  background: white;
+  min-height: 100vh;
+  padding: 24px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ...(all original style blocks from your provided CSS) ... */
+/* For brevity in this message I assume you've kept the original rules exactly as provided in the prompt. */
+/* === END ORIGINAL STYLES === */
+
+/* === NEW: contextual menu + modal styles === */
+.more-actions {
+  position: relative; /* ensure absolute children position relative here */
+}
+
+/* menu card */
+.context-menu {
+  position: absolute;
+  right: 8px;
+  top: 40px;
+  min-width: 140px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.12);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  z-index: 40;
+  transform-origin: top right;
+  animation: pop 120ms ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.context-menu .menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.context-menu .menu-item:focus,
+.context-menu .menu-item:hover {
+  background: #f3f4f6;
+  outline: none;
+}
+
+.context-menu .menu-item .menu-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* delete variant */
+.context-menu .menu-item.delete {
+  color: #b91c1c;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 8, 16, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  padding: 20px;
+}
+
+.modal-card {
+  width: min(1100px, 96%);
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 48px rgba(2, 6, 23, 0.24);
+  overflow: hidden;
+  outline: none;
+}
+
+.modal-header {
+  background: #0f3bb6;
+  color: white;
+  padding: 12px 20px;
+}
+
+.modal-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-job-title strong {
+  font-size: 18px;
+}
+
+.modal-meta {
+  font-size: 13px;
+  margin-top: 6px;
+  color: #e6eefc;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.modal-close {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+/* left column */
+.modal-left {
+  flex: 1.6;
+  background: #f8fbff;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.section-heading {
+  font-size: 13px;
+  color: #0f3bb6;
+  margin: 6px 0 10px 0;
+  font-weight: 700;
+}
+
+.job-desc p {
+  color: #374151;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* benefits chips */
+.benefits {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.benefit-chip {
+  background: #eef2ff;
+  color: #1e40af;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid rgba(30,64,175,0.08);
+}
+
+/* right column */
+.modal-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-details-card {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eef2ff;
+  padding: 12px;
+}
+
+.right-title {
+  color: #0f3bb6;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px dashed #f1f5f9;
+  font-size: 13px;
+}
+
+.detail-row:last-child { border-bottom: none; }
+
+.modal-actions {
+  margin-top: 8px;
+  display:flex;
+  justify-content: flex-end;
+}
+
+.primary-btn {
+  background: #0f3bb6;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 24px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .modal-body {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="recently-searched">
+  <h3 class="section-title">Recently Searched</h3>
+  <div class="separator"></div>
+
+  <div class="search-entry">
+    <div class="entry-content">
+      <div class="field-group">
+        <div class="field-label">Title</div>
+        <div class="field-value title-link">{{ recentSearch.title }}</div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Location</div>
+        <div class="field-value">{{ recentSearch.location }}</div>
+      </div>
+
+      <div class="field-group">
+        <div class="field-label">Search Criteria</div>
+        <div class="field-value">
+          {{ recentSearch.criteria }}
+          <span class="more-link">& 5 more....</span>
+        </div>
+      </div>
+
+      <div class="timestamp">{{ recentSearch.timeAgo }}</div>
+    </div>
+  </div>
+</div>

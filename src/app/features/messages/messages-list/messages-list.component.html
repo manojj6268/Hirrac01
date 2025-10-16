@@ -1,0 +1,32 @@
+<!-- src/app/features/messages/messages-list/messages-list.component.html -->
+<aside class="messages-list" role="navigation" aria-label="Conversations">
+    <div class="list-controls">
+      <div class="tabs">
+        <button class="tab active" type="button">All</button>
+        <button class="tab" type="button">Unread</button>
+      </div>
+    </div>
+  
+    <div class="conversations">
+      <div
+        *ngFor="let convo of filteredConversations"
+        class="conv-item"
+        (click)="selectConversation(convo)"
+        [class.selected]="selectedConvo?.id === convo.id"
+        tabindex="0">
+        <div class="conv-left">
+          <div class="avatar">{{ initials(convo.name) }}</div>
+        </div>
+  
+        <div class="conv-body">
+          <div class="conv-title">{{ convo.name }}</div>
+          <div class="conv-sub">{{ convo.role }}</div>
+        </div>
+  
+        <div class="conv-right">
+          <div class="conv-date">{{ convo.date }}</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  

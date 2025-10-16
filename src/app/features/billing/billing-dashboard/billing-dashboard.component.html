@@ -1,0 +1,13 @@
+<div class="main-container">
+  <div class="billingTop-container">
+      <app-billing-top 
+        [selectedPlan]="selectedPlan"
+        (planSelected)="onPlanSelected($event)"/>
+  </div>
+  <div class="subscription-container">
+      <app-billing-subscription 
+        [selectedPlan]="selectedPlan"
+        (planSelected)="onPlanSelected($event)"
+        (subscriptionPurchased)="onSubscriptionPurchased($event)"/>
+  </div>
+</div>

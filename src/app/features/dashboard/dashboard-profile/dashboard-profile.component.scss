@@ -1,0 +1,375 @@
+ // .dashboard-profile-container{
+//     border: 1px solid red;
+//    // width: 100vw;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     align-items: center;
+
+//     h1{
+//         font-size: 24px;
+//         font-weight: 600;
+//         color: #333;
+//     }
+//     .cards-row{
+//         width: 90%;
+//         height: 30%;
+//         border: 1px solid red; 
+//         .summary-card {
+//           display: flex;
+//           flex-direction: row;
+//           align-items: center;
+//           text-align: left;
+//           padding: 12px;
+//           border-radius: 8px;
+//           background: #f8fafc;
+//           border: 1px solid #e5e7eb;
+//           transition: transform 0.2s ease, box-shadow 0.2s ease;
+//           min-width: 100px;
+//           max-width: 100%;
+//         }
+//     }
+
+      
+//       .summary-card:hover {
+//         transform: translateY(-2px);
+//         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+//       }
+      
+//       .card-icon {
+//         width: 32px;
+//         height: 32px;
+//         border-radius: 6px;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         margin-right: 12px;
+//         flex-shrink: 0;
+//       }
+      
+//       .card-icon.posted-jobs { background: #3b82f6; }
+//       .card-icon.applications { background: #fbbf24; }
+//       .card-icon.shortlisted { background: #10b981; }
+//       .card-icon.interview { background: #3b82f6; }
+//       .card-icon.hired { background: #059669; }
+//       .card-icon.rejected { background: #ef4444; }
+      
+//       .card-icon-image {
+//         width: 18px;
+//         height: 18px;
+//         object-fit: contain;
+//       }
+      
+//       .card-content {
+//         flex: 1;
+//         min-width: 0;
+//         display: flex;
+//         flex-direction: column;
+//         align-items: flex-start;
+//         justify-content: center;
+//       }
+      
+//       .card-number {
+//         font-size: 18px;
+//         font-weight: bold;
+//         color: #1f2937;
+//         line-height: 1;
+//         margin-bottom: 2px;
+//       }
+      
+//       .card-label {
+//         font-size: 10px;
+//         color: #6b7280;
+//         font-weight: 500;
+//         text-transform: uppercase;
+//         letter-spacing: 0.5px;
+//         line-height: 1.2;
+//       }
+      
+//     .summary-card {
+//         width: min(300px, 22vw); 
+//     }
+//     .cards-grid {
+//         display: grid;
+//         grid-auto-flow: column;            /* create columns instead of rows */
+//         grid-auto-columns: min-content;   
+//         gap: 16px;
+//         margin-top: 20px;
+    
+//         overflow-x: auto;
+//         -webkit-overflow-scrolling: touch;
+//       }
+//     .job-InterviewsContainer{
+//         border: 1px solid green;
+//         width: 90%;
+//         height: 500px;
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         align-items: center;
+//         gap: 10px;
+
+//         .Activjob-container{
+//             border: 1px solid blueviolet;
+//             width: 60%;
+//             height: 100%;
+//             overflow: hidden;
+//         }
+//         .interview-container{
+//           border: 1px solid blueviolet;
+//             width: 40%;
+//             height: 100%;
+//             align-items: center;
+//             overflow: hidden;
+//             app-dashboard-bottom-right{
+//             width: 95%;
+//             height: 90%;}
+//         }
+//     }
+//     .recent-search-container{
+//         border: 1px solid orange;
+//         width: 90%;
+//         height: 50%;
+//     }
+// }
+
+:host {
+  display: block;
+  box-sizing: border-box;
+}
+
+/* Container */
+.dashboard-profile-container {
+  max-width: 1200px;
+  // margin: 20px auto;
+  padding: 18px;
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  color: #1f2937; /* neutral-800 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header */
+.dashboard-header {
+  margin-bottom: 18px;
+}
+
+.greeting {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem; /* ~24px */
+  color: #111827;
+}
+
+/* --- SUMMARY CARDS --- */
+.cards-row {
+  margin-bottom: 18px;
+}
+
+/* wrapper for potential additional controls (kept minimal) */
+.summary-cards {
+  overflow: hidden;
+}
+
+/* horizontal scroll area */
+.cards-grid {
+  display: flex;
+  gap: 14px;
+  padding: 6px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  align-items: stretch;
+
+}
+
+/* simple visual polish for scrollbars (WebKit) */
+.cards-grid::-webkit-scrollbar {
+  height: 9px;
+}
+.cards-grid::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: rgba(0,0,0,0.08);
+}
+.cards-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* card */
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(15,23,42,0.05);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.04);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  flex: 0 0 180px; /* base width */
+  cursor: default;
+  outline: none;
+
+}
+
+.summary-card:focus,
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(15,23,42,0.12);
+}
+
+/* mobile narrower card size */
+@media (max-width: 780px) {
+  .summary-card {
+    flex: 0 0 160px;
+    min-width: 140px;
+  }
+}
+
+/* icon / bubble */
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left; 
+  border-radius: 999px;
+  width: 56px;
+  height: 56px;
+  flex: 0 0 56px;
+  box-shadow: 0 1px 6px rgba(15,23,42,0.04);
+}
+
+/* small images inside bubble scale */
+.card-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* content */
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-number {
+  font-size: 1.25rem; /* 20px */
+  font-weight: 700;
+  line-height: 1;
+  color: #0f172a; /* neutral-900 */
+  
+}
+
+.card-label {
+  font-size: 0.875rem; /* 14px */
+  color: #475569; /* neutral-600 */
+  margin-top: 4px;
+}
+
+/* color bubble variations (as requested) */
+.card-icon.posted-jobs,
+.posted-jobs.card-icon {
+  background: linear-gradient(180deg, rgba(59,130,246,0.12), rgba(59,130,246,0.06));
+  border: 1px solid rgba(59,130,246,0.12);
+}
+.card-icon.applications,
+.applications.card-icon {
+  background: linear-gradient(180deg, rgba(250,204,21,0.10), rgba(250,204,21,0.04));
+  border: 1px solid rgba(250,204,21,0.12);
+}
+.card-icon.shortlisted,
+.shortlisted.card-icon {
+  background: linear-gradient(180deg, rgba(34,197,94,0.10), rgba(34,197,94,0.04));
+  border: 1px solid rgba(34,197,94,0.12);
+}
+.card-icon.interview,
+.interview.card-icon {
+  background: linear-gradient(180deg, rgba(99,102,241,0.10), rgba(99,102,241,0.04));
+  border: 1px solid rgba(99,102,241,0.12);
+}
+.card-icon.hired,
+.hired.card-icon {
+  background: linear-gradient(180deg, rgba(20,184,166,0.10), rgba(20,184,166,0.04));
+  border: 1px solid rgba(20,184,166,0.12);
+}
+.card-icon.rejected,
+.rejected.card-icon {
+  background: linear-gradient(180deg, rgba(239,68,68,0.10), rgba(239,68,68,0.04));
+  border: 1px solid rgba(239,68,68,0.12);
+}
+
+/* --- MIDDLE GRID (Active Jobs + Interviews) --- */
+.job-InterviewsContainer {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+  margin-bottom: 18px;
+  min-height: 500px;
+}
+
+/* left and right containers styles */
+.Activjob-container,
+.interview-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px;
+  // border: 1px solid rgba(15,23,42,0.04);
+  // box-shadow: 0 1px 8px rgba(15,23,42,0.04);
+  overflow: auto;
+}
+
+/* Right container fixed width safety (redundant to grid but explicit) */
+.interview-container {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive: adjust right column width at 1080px */
+@media (max-width: 1080px) {
+  .job-InterviewsContainer {
+    grid-template-columns: 1fr 320px;
+  }
+}
+
+/* Responsive: stack at narrow screens */
+@media (max-width: 780px) {
+  .job-InterviewsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .interview-container {
+    order: 2;
+  }
+
+  .Activjob-container {
+    order: 1;
+  }
+}
+
+/* --- BOTTOM: Recently Searched band --- */
+.recent-search-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 1px 6px rgba(15,23,42,0.03);
+}
+
+/* Accessibility helpers */
+
+.summary-card:focus {
+  box-shadow: 0 10px 30px rgba(2,6,23,0.18);
+  border-color: rgba(59,130,246,0.18);
+}
+
+/* small utility */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}

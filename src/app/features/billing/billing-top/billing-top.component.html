@@ -1,0 +1,24 @@
+<div class="billing-top">
+  <div class="billing-content">
+    <h2 class="main-heading">Transforming hiring through smarter sourcing strategies.</h2>
+    
+    <p class="subheading">Quickly identify the right talent with a smart hiring tool designed for your team.</p>
+    
+    <div class="subscription-toggle">
+      <button 
+        class="toggle-option" 
+        [class.active]="selectedPlan === 'monthly'"
+        (click)="selectPlan('monthly')">
+        Monthly
+      </button>
+      <button 
+        class="toggle-option" 
+        [class.active]="selectedPlan === 'yearly'"
+        (click)="selectPlan('yearly')">
+        Yearly
+      </button>
+    </div>
+    
+    <p class="savings-text"><span class="savings-text-highlight">Save 10% </span> with yearly subscription</p>
+  </div>
+</div>

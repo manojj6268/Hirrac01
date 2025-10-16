@@ -1,0 +1,88 @@
+<div class="page-wrap">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <h3 class="sidebar-title">Profile Settings</h3>
+  
+        <nav class="sidebar-nav">
+          <button
+            *ngFor="let item of navItems"
+            class="nav-item"
+            [class.active]="activeRoute === item.route"
+            (click)="navigateTo(item.route)"
+            type="button"
+          >
+            <span class="nav-dot" [class.hidden]="activeRoute !== item.route"></span>
+            <span class="nav-label">{{ item.label }}</span>
+          </button>
+        </nav>
+  
+        <div class="company-section">
+          <h4>Company Settings</h4>
+        </div>
+      </div>
+    </aside>
+  
+    <!-- Main content -->
+    <main class="main-card">
+      <div class="card">
+        <div class="content-header">
+          <h4>Notification Settings</h4>
+        </div>
+  
+        <div class="settings-list">
+          <div class="setting-item">
+            <div class="setting-card">
+              <div class="setting-label">Notification</div>
+              <div class="setting-control">
+                <button
+                  class="toggle"
+                  role="switch"
+                  [attr.aria-checked]="notification ? 'true' : 'false'"
+                  (click)="toggle('notification')"
+                >
+                  <span class="knob" [class.on]="notification"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+  
+          <div class="setting-item">
+            <div class="setting-card">
+              <div class="setting-label">Email alerts</div>
+              <div class="setting-control">
+                <button
+                  class="toggle"
+                  role="switch"
+                 
+                  [attr.aria-checked]="emailAlerts ? 'true' : 'false'"
+                  
+                  (click)="toggle('emailAlerts')"
+                >
+                  <span class="knob" [class.on]="emailAlerts"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+  
+          <div class="setting-item">
+            <div class="setting-card">
+              <div class="setting-label">Candidate message alerts</div>
+              <div class="setting-control">
+                <button
+                  class="toggle"
+                  role="switch"
+                  [attr.aria-checked]="candidateMessageAlerts ? 'true' : 'false'"
+                  (click)="toggle('candidateMessageAlerts')"
+                >
+                  <span class="knob" [class.on]="candidateMessageAlerts"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </main>
+  </div>
+  

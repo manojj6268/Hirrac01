@@ -1,0 +1,25 @@
+<div class="app-header">
+  <div class="header-inner">
+    <div class="logo-container">
+      <img src="assets/images/logo.png" alt="HIRRAC Logo" class="logo-img">
+    </div>
+
+    <div class="user-actions" (click)="$event.stopPropagation()">
+      <div class="user-action" (click)="goToMessages()">Messages</div>
+      <div class="user-action">Notifications</div>
+
+
+      <!-- Profile button -->
+      <button type="button" class="profile-button" 
+      (click)="toggleProfileMenu(); $event.stopPropagation()" [attr.aria-expanded]="isProfileMenuOpen" aria-haspopup="true">
+        <div class="profile-email">Yugandhar&#64;hblbot.com</div>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div class="profile-dropdown" *ngIf="isProfileMenuOpen" (click)="$event.stopPropagation()" role="menu">
+        <button class="dropdown-item" (click)="goToProfile()">View Profile</button>
+        <button class="dropdown-item" (click)="performLogout()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

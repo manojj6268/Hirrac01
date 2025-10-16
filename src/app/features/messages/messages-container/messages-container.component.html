@@ -1,0 +1,29 @@
+<!-- src/app/features/messages/messages-container/messages-container.component.html -->
+<div class="messages-page">
+    <!-- Top Header -->
+    <div class="messages-header">
+      <h1 class="messages-title">Messages</h1>
+      <div class="header-search">
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search candidate"
+          class="search-input" />
+        <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.35-4.35"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="messages-content">
+      <app-messages-list
+        (conversationSelected)="onConversationSelected($event)">
+      </app-messages-list>
+  
+      <app-messages-panel
+        [selectedConversation]="selectedConversation">
+      </app-messages-panel>
+    </div>
+  </div>  

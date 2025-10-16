@@ -1,0 +1,40 @@
+:root {
+  --sidebar-compact: 60px;
+  --sidebar-expanded: 220px;
+  --header-height: 64px;
+
+}
+
+
+.body-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top:64px;
+}
+
+.sidebar-container {
+  margin-top: 20px;
+  height: 100vh;
+  width: 50px;
+
+}
+app-sidebar {
+
+  height: 100vh;
+  background-color: #053997;
+  background-color: transparent;
+}
+/* Default (compact) router margin to clear the compact sidebar */
+.router-main {
+  // margin-left: var(--sidebar-compact);
+  margin-top: var(--header-height);
+  transition: margin-left .22s ease;
+ 
+}
+
+/* When the sidebar expands, increase left margin to match sidebar width */
+// .router-main.expanded {
+//   margin-left: var(--sidebar-expanded);
+// }
+
+.sidebar { top: var(--header-height); }

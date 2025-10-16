@@ -1,0 +1,100 @@
+/* src/app/features/messages/messages-list/messages-list.component.scss */
+
+.messages-list {
+    background: #fff;
+    border-right: 1px solid #e9f0fb;
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+  
+    .list-controls {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 10px;
+  
+      .tabs { 
+        display: flex; 
+        gap: 8px;
+        justify-content: space-between;
+        border: 1px solid #e9f0fb;
+        border-radius: 8px;
+        padding: 8px;
+        
+        button.tab {
+          padding: 8px 12px !important; 
+          border-radius: 6px !important; 
+          border: none !important; 
+          background: #fff !important; 
+          color: #0b63d3 !important; 
+          font-weight: 700 !important; 
+          cursor: pointer !important;
+          font-size: 14px !important;
+          transition: all 0.2s ease !important;
+          outline: none !important;
+          box-shadow: none !important;
+          margin: 0 !important;
+          flex: 1 !important;
+          height: auto !important;
+          
+          &:hover {
+            background: #f0f4ff !important;
+          }
+          
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+        
+        button.tab.active { 
+          background: #0b63d3 !important; 
+          color: #fff !important; 
+          border: none !important;
+          
+          &:hover {
+            background: #0a5bc4 !important;
+          }
+        }
+      }
+    }
+  
+    .conversations {
+      overflow-y: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+  
+    .conv-item {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px;
+      border-radius:4px;
+      cursor:pointer;
+      transition: background .12s ease;
+  
+      &:hover { background: #f1f8ff; }
+  
+      &.selected {
+        background: #e6f0ff;
+        outline: 2px solid #0b63d3;
+        margin: 4px;
+      }
+  
+      .avatar {
+        width:44px; height:44px; border-radius:6px; background:#0b63d3; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;
+      }
+  
+      .conv-body { flex:1;
+        .conv-title { font-weight:700; color:#14365a; font-size:14px; }
+        .conv-sub { color:#6b7280; font-size:13px; margin-top:4px; }
+      }
+  
+      .conv-right .conv-date { font-size:12px; color:#6b7280; }
+    }
+  }
+  

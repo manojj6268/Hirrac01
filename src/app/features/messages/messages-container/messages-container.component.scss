@@ -1,0 +1,73 @@
+/* src/app/features/messages/messages-container/messages-container.component.scss */
+
+.messages-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+    background: #f8f9fa;
+    padding: 5px;
+    gap: 5px;
+  }
+
+  .messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    
+    .messages-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #14365a;
+      margin: 0;
+    }
+    
+    .header-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+      
+      .search-input {
+        width: 300px;
+        padding: 10px 40px 10px 16px;
+        border: 1px solid #e6eef9;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        
+        &:focus {
+          border-color: #0b63d3;
+          box-shadow: 0 0 0 2px rgba(11, 99, 211, 0.1);
+        }
+      }
+      
+      .search-icon {
+        position: absolute;
+        right: 12px;
+        color: #6b7280;
+        pointer-events: none;
+      }
+    }
+  }
+  
+  .messages-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    background: #f8f9fa;
+    overflow: hidden;
+    min-height: 600px;
+  }
+  
+  @media (max-width: 900px) {
+    .messages-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .messages-header {
+      .header-search .search-input {
+        width: 200px;
+      }
+    }
+  }
+  

@@ -1,0 +1,370 @@
+<div class="create-job-container">
+    <div class="create-job-header">
+        <h1>Create a New Job</h1>
+    </div>
+
+    <form *ngIf="!isPreviewMode" [formGroup]="createJobForm" (ngSubmit)="onSubmit()" class="create-job-form">
+
+        <!-- Job Title Section -->
+        <div class="form-section">
+            <div class="form-group">
+                <label for="jobTitle">Job Title *</label>
+                <input type="text" id="jobTitle" formControlName="jobTitle" class="form-control"
+                    [class.error]="createJobForm.get('jobTitle')?.invalid && createJobForm.get('jobTitle')?.touched"
+                    placeholder="Enter job title (e.g., Marketing Manager, Data Analyst)">
+                <div class="error-message"
+                    *ngIf="createJobForm.get('jobTitle')?.invalid && createJobForm.get('jobTitle')?.touched">
+                    Job title is required
+                </div>
+            </div>
+        </div>
+
+        <!-- Location Details Section -->
+        <div class="form-section">
+            <h2 class="section-title">Location Details</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="locationType">Please select the option that best describes the job location? *</label>
+                    <select id="locationType" formControlName="locationType" class="form-control"
+                        [class.error]="createJobForm.get('locationType')?.invalid && createJobForm.get('locationType')?.touched">
+                        <option value="">Select location type</option>
+                        <option *ngFor="let option of locationTypeOptions" [value]="option">
+                            {{ option }}
+                        </option>
+                    </select>
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('locationType')?.invalid && createJobForm.get('locationType')?.touched">
+                        Location type is required
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Grid: 2 boxes left, 2 boxes right -->
+            <div class="location-grid">
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" formControlName="city" class="form-control"
+                        [class.error]="createJobForm.get('city')?.invalid && createJobForm.get('city')?.touched"
+                        placeholder="Enter city">
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('city')?.invalid && createJobForm.get('city')?.touched">
+                        City is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="area">Area *</label>
+                    <input type="text" id="area" formControlName="area" class="form-control"
+                        [class.error]="createJobForm.get('area')?.invalid && createJobForm.get('area')?.touched"
+                        placeholder="Enter area">
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('area')?.invalid && createJobForm.get('area')?.touched">
+                        Area is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pinCode">Pin code *</label>
+                    <input type="text" id="pinCode" formControlName="pinCode" class="form-control"
+                        [class.error]="createJobForm.get('pinCode')?.invalid && createJobForm.get('pinCode')?.touched"
+                        placeholder="Enter 6-digit pin code">
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('pinCode')?.invalid && createJobForm.get('pinCode')?.touched">
+                        <div *ngIf="createJobForm.get('pinCode')?.errors?.['required']">Pin code is required</div>
+                        <div *ngIf="createJobForm.get('pinCode')?.errors?.['pattern']">Please enter a valid 6-digit pin
+                            code</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" formControlName="state" class="form-control"
+                        placeholder="Enter state (optional)">
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Details Section -->
+        <div class="form-section">
+            <h2 class="section-title">Job Details</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="recruitmentTimeline">Recruitment timeline for this job? *</label>
+                    <select id="recruitmentTimeline" formControlName="recruitmentTimeline" class="form-control"
+                        [class.error]="createJobForm.get('recruitmentTimeline')?.invalid && createJobForm.get('recruitmentTimeline')?.touched">
+                        <option value="">Select timeline</option>
+                        <option *ngFor="let option of recruitmentTimelineOptions" [value]="option">
+                            {{ option }}
+                        </option>
+                    </select>
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('recruitmentTimeline')?.invalid && createJobForm.get('recruitmentTimeline')?.touched">
+                        Recruitment timeline is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="numberOfPeople">Number of people to hire in the next 30 days *</label>
+                    <input type="number" id="numberOfPeople" formControlName="numberOfPeople" class="form-control"
+                        [class.error]="createJobForm.get('numberOfPeople')?.invalid && createJobForm.get('numberOfPeople')?.touched"
+                        placeholder="Enter number" min="1">
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('numberOfPeople')?.invalid && createJobForm.get('numberOfPeople')?.touched">
+                        <div *ngIf="createJobForm.get('numberOfPeople')?.errors?.['required']">Number of people is
+                            required</div>
+                        <div *ngIf="createJobForm.get('numberOfPeople')?.errors?.['min']">Number must be at least 1
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="jobType">Job Type *</label>
+                    <select id="jobType" formControlName="jobType" class="form-control"
+                        [class.error]="createJobForm.get('jobType')?.invalid && createJobForm.get('jobType')?.touched">
+                        <option value="">Select job type</option>
+                        <option *ngFor="let option of jobTypeOptions" [value]="option">
+                            {{ option }}
+                        </option>
+                    </select>
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('jobType')?.invalid && createJobForm.get('jobType')?.touched">
+                        Job type is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="payMaximum">Pay Maximum *</label>
+                    <input type="number" id="payMaximum" formControlName="payMaximum" class="form-control"
+                        [class.error]="createJobForm.get('payMaximum')?.invalid && createJobForm.get('payMaximum')?.touched"
+                        placeholder="Enter maximum pay" min="0" step="0.01">
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('payMaximum')?.invalid && createJobForm.get('payMaximum')?.touched">
+                        <div *ngIf="createJobForm.get('payMaximum')?.errors?.['required']">Pay maximum is required</div>
+                        <div *ngIf="createJobForm.get('payMaximum')?.errors?.['min']">Pay must be a positive number
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="payUnit">Pay Period *</label>
+                    <select id="payUnit" formControlName="payUnit" class="form-control"
+                        [class.error]="createJobForm.get('payUnit')?.invalid && createJobForm.get('payUnit')?.touched">
+                        <option value="">Select pay period</option>
+                        <option *ngFor="let option of payUnitOptions" [value]="option">
+                            {{ option }}
+                        </option>
+                    </select>
+                    <div class="error-message"
+                        *ngIf="createJobForm.get('payUnit')?.invalid && createJobForm.get('payUnit')?.touched">
+                        Pay period is required
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="form-section">
+            <h2 class="section-title">Benefits</h2>
+
+            <div class="benefits-container">
+                <div class="benefit-tag" *ngFor="let benefit of benefitsOptions"
+                    [class.selected]="selectedBenefits.has(benefit.value)" (click)="toggleBenefit(benefit.value)">
+                    + {{ benefit.label }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Description Section -->
+        <div class="form-section">
+            <h2 class="section-title">Job Description</h2>
+            <div class="form-group">
+                <div class="rich-text-editor">
+                    <div id="jobDescription" #editor contenteditable="true" class="form-control editor-content"
+                        [class.error]="createJobForm.get('jobDescription')?.invalid && createJobForm.get('jobDescription')?.touched"
+                        placeholder="Enter detailed job description..." (input)="updateDescription()">
+                    </div>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" (click)="formatText('bold')" title="Bold">
+                            <strong>B</strong>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('italic')" title="Italic">
+                            <em>I</em>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('underline')" title="Underline">
+                            <u>U</u>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('strikeThrough')"
+                            title="Strike-through">
+                            <s>S</s>
+                        </button>
+                        <div class="toolbar-separator"></div>
+                        <button type="button" class="toolbar-btn" (click)="formatText('insertUnorderedList')"
+                            title="Bullet List">
+                            <span class="list-icon">•</span>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('insertOrderedList')"
+                            title="Numbered List">
+                            <span class="list-icon">1.</span>
+                        </button>
+                        <div class="toolbar-separator"></div>
+                        <button type="button" class="toolbar-btn" (click)="formatText('outdent')"
+                            title="Decrease Indent">
+                            <span class="indent-icon">⇤</span>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('indent')"
+                            title="Increase Indent">
+                            <span class="indent-icon">⇥</span>
+                        </button>
+                        <div class="toolbar-separator"></div>
+                        <button type="button" class="toolbar-btn" (click)="formatText('justifyLeft')"
+                            title="Align Left">
+                            <span class="align-icon">⬅</span>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('justifyCenter')"
+                            title="Align Center">
+                            <span class="align-icon">⬌</span>
+                        </button>
+                        <button type="button" class="toolbar-btn" (click)="formatText('justifyRight')"
+                            title="Align Right">
+                            <span class="align-icon">➡</span>
+                        </button>
+                        
+                    </div>
+                </div>
+                <div class="error-message"
+                    *ngIf="createJobForm.get('jobDescription')?.invalid && createJobForm.get('jobDescription')?.touched">
+                    Job description is required
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" (click)="onPreview()" [disabled]="!createJobForm.valid">
+                Preview
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="!createJobForm.valid">
+                Confirm & Post
+            </button>
+        </div>
+    </form>
+
+    <!-- Preview Modal -->
+    <div *ngIf="isPreviewMode" class="preview-backdrop">
+        <div class="preview-modal">
+            <div class="preview-header">
+                <div class="preview-text">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" width="20px" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 
+             12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 
+             2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 
+             11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 
+             2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 
+             12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 
+             16s4.5-2.02 4.5-4.5S14.48 7 12 7z" />
+                    </svg>
+                    <span>Preview</span>
+                </div>
+
+                <button class="close-btn" (click)="onClosePreview()" title="Close">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" width="24px" viewBox="0 0 24 24">
+                        <!-- White circle background -->
+                        <circle cx="12" cy="12" r="10" fill="white" />
+
+                        <!-- Red Cross (X) -->
+                        <path d="M14.59 8L12 10.59 9.41 8 
+             8 9.41 10.59 12 
+             8 14.59 9.41 16 
+             12 13.41 14.59 16 
+             16 14.59 13.41 12 
+             16 9.41 14.59 8z" fill="red" />
+                    </svg>
+                </button>
+
+            </div>
+            <div class="preview-title">
+
+                <div><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                            width="24px" fill="#black">
+                            <path
+                                d="M160-120q-33 0-56.5-23.5T80-200v-440q0-33 23.5-56.5T160-720h160v-80q0-33 23.5-56.5T400-880h160q33 0 56.5 23.5T640-800v80h160q33 0 56.5 23.5T880-640v440q0 33-23.5 56.5T800-120H160Zm240-600h160v-80H400v80Zm400 360H600v80H360v-80H160v160h640v-160Zm-360 0h80v-80h-80v80Zm-280-80h200v-80h240v80h200v-200H160v200Zm320 40Z" />
+                        </svg></span> {{ createJobForm.get('jobTitle')?.value }}</div>
+                <div><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                            width="24px" fill="#black">
+                            <path
+                                d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-480Z" />
+                        </svg></span> {{ createJobForm.get('area')?.value }}, {{
+                    createJobForm.get('city')?.value }} {{ createJobForm.get('pinCode')?.value }}</div>
+                <div><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                            width="24px" fill="#black">
+                            <path
+                                d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+                        </svg></span> {{ today | date:'MMM dd, yyyy' }}</div>
+            </div>
+            <div class="preview-body">
+                <div class="preview-left">
+                    <div class="preview-section">
+                        <h3 class="preview-section-title">JOB DESCRIPTION</h3>
+                        <div class="preview-description" [innerHTML]="createJobForm.get('jobDescription')?.value"></div>
+                    </div>
+
+                    <div class="preview-section" *ngIf="selectedBenefits.size > 0">
+                        <h3 class="preview-section-title">BENEFITS</h3>
+                        <div class="preview-benefits">
+                            <div class="benefit-pill" *ngFor="let key of getSelectedBenefits()">{{ getBenefitLabel(key)
+                                }}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-right">
+                    <div class="preview-section">
+                        <h3 class="preview-section-title">JOB DETAILS</h3>
+                        <div class="detail-row">
+                            <span class="label">Recruitment timeline for this job:</span>
+                            <div class="value-container">
+                                <span class="value">{{ createJobForm.get('recruitmentTimeline')?.value }}</span>
+                                <mat-icon class="edit-icon" (click)="editField('recruitmentTimeline')">edit</mat-icon>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">No of Openings:</span>
+                            <div class="value-container">
+                                <span class="value">{{ (createJobForm.get('numberOfPeople')?.value ||
+                                    0).toString().padStart(2, '0') }}</span>
+                                <mat-icon class="edit-icon" (click)="editField('numberOfPeople')">edit</mat-icon>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Job Type</span>
+                            <div class="value-container">
+                                <span class="value">{{ createJobForm.get('jobType')?.value }}</span>
+                                <mat-icon class="edit-icon" (click)="editField('jobType')">edit</mat-icon>
+                            </div>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Pay</span>
+                            <div class="value-container">
+                                <span class="value">₹{{ createJobForm.get('payMaximum')?.value | number:'1.0-0' }}/{{
+                                    createJobForm.get('payUnit')?.value?.toLowerCase() }}</span>
+                                <mat-icon class="edit-icon" (click)="editField('pay')">edit</mat-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="preview-footer">
+                <button type="button" class="btn btn-primary" (click)="onSubmit()">
+                    Confirm & Post
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+{
+    "plans": [
+      {
+        "name": "Standard",
+        "icon": "assets/images/standard.png",
+        "type": "Occasional hiring",
+        "price": "₹8,000",
+        "includes": "Included features",
+        "features": [
+          "30 contacts per month",
+          "Screen resumes with AI-assistance",
+          "Access a global pool of candidates"
+        ]
+      },
+      {
+        "name": "Professional",
+        "icon": "assets/images/profesional.png",
+        "type": "Continual hiring",
+        "price": "₹15,000 per month",
+        "includes": "Everything in Standard, plus",
+        "features": [
+          "100 contacts per month",
+          "Get access to candidate engagement insights",
+          "Improve team collaboration with shared candidate lists",
+          "Save time with bulk messaging"
+        ]
+      }
+    ]
+  }
+  

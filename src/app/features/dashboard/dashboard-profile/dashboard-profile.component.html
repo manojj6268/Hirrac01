@@ -1,0 +1,83 @@
+<!-- <div class="dashboard-profile-container">
+    <h1>Greetings</h1>
+    <div class="cards-row">
+        <div class="summary-cards">
+            <div class="cards-grid">
+                <ng-container *ngFor="let c of cards">
+                    <div class="summary-card">
+                        <div class="card-icon" [ngClass]="c.cssClass">
+                            <img *ngIf="c.icon" [src]="c.icon" alt="{{c.label}}" class="card-icon-image" />
+                        </div>
+                        <div class="card-content">
+                            <div class="card-number">{{ c.value }}</div>
+                            <div class="card-label">{{ c.label }}</div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+    <div class="job-InterviewsContainer">
+        <div class="Activjob-container">
+            <app-dashboard-middle-left></app-dashboard-middle-left>
+        </div>
+        <div class="interview-container">
+            <app-dashboard-bottom-right></app-dashboard-bottom-right>
+        </div>
+    </div>
+    <div class="recent-search-container">
+        <app-dashboard-botom-left></app-dashboard-botom-left>  
+    </div>
+</div> -->
+
+<div class="dashboard-profile-container" role="region" aria-label="Dashboard profile container">
+    <header class="dashboard-header" role="banner" aria-label="Greeting header">
+        <h1 class="greeting">{{ greeting }}</h1>
+    </header>
+  
+    <!-- Summary cards row -->
+    <section class="cards-row" role="region" aria-label="Summary cards">
+      <div class="summary-cards" role="list" aria-label="Summary statistics">
+        <div class="cards-grid" role="list">
+          <ng-container *ngFor="let c of cards; let i = index">
+            <article
+              class="summary-card"
+              role="listitem"
+              [attr.aria-label]="c.label + ' - ' + c.value"
+              [attr.data-testid]="'summary-' + i"
+              tabindex="0"
+            >
+              <div class="card-icon" [ngClass]="c.cssClass" aria-hidden="true">
+                <img *ngIf="c.icon" [src]="c.icon" [alt]="c.label + ' icon'"/>
+              </div>
+  
+              <div class="card-content">
+                <div class="card-number" aria-live="polite">{{ c.value }}</div>
+                <div class="card-label">{{ c.label }}</div>
+              </div>
+            </article>
+          </ng-container>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Middle area: Active Jobs (flexible) + Interviews (fixed) -->
+    <section class="job-InterviewsContainer" role="region" aria-label="Active jobs and interviews">
+      <div class="Activjob-container" role="region" aria-label="Active jobs">
+        <!-- Placeholder child component: left middle area -->
+        <app-dashboard-middle-left></app-dashboard-middle-left>
+      </div>
+  
+      <aside class="interview-container" role="region" aria-label="Interviews">
+        <!-- Placeholder child component: right fixed interviews area -->
+        <app-dashboard-bottom-right></app-dashboard-bottom-right>
+      </aside>
+    </section>
+  
+    <!-- Bottom band: Recently Searched -->
+    <footer class="recent-search-container" role="region" aria-label="Recently searched">
+      <app-dashboard-botom-left></app-dashboard-botom-left>
+    </footer>
+</div>
+  

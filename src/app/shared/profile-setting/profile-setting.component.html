@@ -1,0 +1,102 @@
+<div class="page-wrap">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <h3 class="sidebar-title">Profile Settings</h3>
+  
+        <nav class="sidebar-nav">
+          <button class="nav-item active">
+            <span class="nav-dot"></span>
+            <span>Profile & Security</span>
+          </button>
+          <button class="nav-item" routerLink="/notification-setting" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+            <span class="nav-dot hidden"></span>
+            <span>Notification Settings</span>
+          </button>
+          <button class="nav-item" routerLink="/billing" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+            <span class="nav-dot hidden"></span>
+            <span>Subscription & Billing</span>
+          </button>
+          <button class="nav-item">
+            <span class="nav-dot hidden"></span>
+            <span>Support & Help</span>
+          </button>
+        </nav>
+  
+        <div class="company-section">
+          <h4>Company Settings</h4>
+        </div>
+      </div>
+    </aside>
+  
+    <!-- Main Content -->
+    <main class="main-card">
+      <div class="card">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-grid">
+          <div class="row two-cols">
+            <div class="form-group">
+              <label for="email" class="label">Mail ID</label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="Enter your mail ID"
+              />
+              <div
+                class="error"
+                *ngIf="
+                  profileForm.get('email')?.invalid &&
+                  profileForm.get('email')?.touched
+                "
+              >
+                Mail ID is required.
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="phone" class="label">Phone Number</label>
+              <input
+                id="phone"
+                type="tel"
+                formControlName="phone"
+                placeholder="9876543210"
+              />
+            </div>
+          </div>
+  
+          <div class="row two-cols">
+            <div class="form-group">
+              <label for="firstName" class="label">First Name</label>
+              <input id="firstName" type="text" formControlName="firstName" />
+            </div>
+  
+            <div class="form-group">
+              <label for="lastName" class="label">Last Name</label>
+              <input id="lastName" type="text" formControlName="lastName" />
+            </div>
+          </div>
+  
+          <div class="row single-col">
+            <div class="form-group">
+              <label for="password" class="label">Create Password</label>
+              <input
+                id="password"
+                type="password"
+                formControlName="password"
+                placeholder="********"
+              />
+            </div>
+          </div>
+  
+          <div class="row actions">
+            <button type="submit" class="btn primary" [disabled]="isSaving">
+              {{ isSaving ? "Saving..." : "Confirm & Save" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  

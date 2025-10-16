@@ -1,0 +1,15 @@
+.dashboard-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+app-dashboard-top-left {
+  height: 20%;
+}
+app-dashboard-middle-left {
+  height: 45%;
+}
+app-dashboard-botom-left {
+  height: 20%;
+}

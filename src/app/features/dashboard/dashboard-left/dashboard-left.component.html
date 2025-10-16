@@ -1,0 +1,16 @@
+<div class="dashboard-left">
+  <app-dashboard-top-left
+    [username]="username"
+    [newApplicationsCount]="newApplicationsCount">
+  </app-dashboard-top-left>
+
+  <div class="spacer" style="height: 16px;"></div>
+
+  <app-dashboard-middle-left></app-dashboard-middle-left>
+
+  <div class="spacer" style="height: 16px;"></div>
+
+  <app-dashboard-botom-left
+    [recentSearch]="data.recentSearch">
+  </app-dashboard-botom-left>
+</div>

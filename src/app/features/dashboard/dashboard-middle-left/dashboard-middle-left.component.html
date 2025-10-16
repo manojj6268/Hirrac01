@@ -1,0 +1,25 @@
+<div class="active-jobs">
+  <h2 class="section-title">Active Jobs</h2>
+
+  <div class="jobs-table">
+    <div class="table-header">
+      <div class="header-cell">Position</div>
+      <div class="header-cell">Applications</div>
+      <div class="header-cell">Shortlisted</div>
+      <div class="header-cell">Interview</div>
+      <div class="header-cell">Hired</div>
+      <div class="header-cell">Rejected</div>
+    </div>
+
+    <ng-container *ngFor="let j of jobs">
+      <div class="table-row">
+        <div class="job-title">{{ j.title }}</div>
+        <div class="stat-cell applications">{{ j.applications }}</div>
+        <div class="stat-cell shortlisted">{{ j.shortlisted }}</div>
+        <div class="stat-cell interview">{{ j.interview }}</div>
+        <div class="stat-cell hired">{{ j.hired | number:'2.0' }}</div>
+        <div class="stat-cell rejected">{{ j.rejected }}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>

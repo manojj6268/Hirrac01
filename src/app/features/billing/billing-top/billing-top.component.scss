@@ -1,0 +1,130 @@
+/* src/app/features/billing/billing-top/billing-top.component.scss */
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.billing-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  // background: #fff;
+  padding: 20px 20px;
+}
+
+
+.billing-content {
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.main-heading {
+  font-family: 'Open Sans';
+  font-size: 36px;
+  font-weight: 500;
+  color: #000000;
+  margin: 0 0 15px 0;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.subheading {
+  font-family: 'Open Sans';
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #262630;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+
+.subscription-toggle {
+  display: inline-flex;
+  background: #D7E5FF;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px; // Reduced from 16px to 8px
+  position: relative;
+}
+
+.toggle-option {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  color: #333333;
+  font-family: 'Open Sans';
+  font-size: 0.9rem;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  min-width: 60px;
+}
+
+.toggle-option.active {
+  background: #1A50A8;
+  color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(26, 80, 168, 0.2);
+}
+
+.toggle-option:hover:not(.active) {
+  background: rgba(26, 80, 168, 0.1);
+}
+
+.savings-text {
+  font-family: 'Open Sans';
+  font-size: 0.9rem;
+  font-weight: 400;
+  color:  #000000;
+  margin: 0;
+  line-height: 1.4;
+}
+.savings-text-highlight{
+  font-family: 'Open Sans';
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #007BFF;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-heading {
+    font-size: 28px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .subheading {
+    font-size: 1rem;
+  }
+  
+  .billing-top {
+    padding: 15px 15px;
+  }
+  
+  .billing-content {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-heading {
+    font-size: 24px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .billing-content {
+    padding: 0 5px;
+  }
+}
+
+

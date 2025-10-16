@@ -1,0 +1,35 @@
+<div class="interviews-section">
+    <h3 class="section-title">Interviews</h3>
+  
+    <div class="interviews-list">
+      <ng-container *ngFor="let dayBlock of interviews">
+        <div class="interview-day">
+          <h4 class="day-title">{{ dayBlock.day }}</h4>
+  
+          <ng-container *ngFor="let it of dayBlock.items">
+            <div class="interview-item">
+              <div class="interview-avatar">
+                <div class="avatar-circle">{{ it.initials || getInitials(it.name) }}</div>
+              </div>
+  
+              <div class="interview-details">
+                <div class="candidate-name">{{ it.name }}</div>
+                <div class="position">{{ it.position }}</div>
+              </div>
+  
+              <div class="interview-type">
+                <span class="type-badge" [ngClass]="it.type">
+                  {{ (it.type === 'phone' ? 'Phone' : (it.type === 'in-person' ? 'In-Person' : 'Video')) }}
+                </span>
+              </div>
+  
+              <div class="interview-time">
+                <div class="time">{{ it.time }}</div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  

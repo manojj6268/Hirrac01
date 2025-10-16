@@ -1,0 +1,11 @@
+
+ .content-container{
+  display: flex;
+  justify-content: space-between;
+ }
+ app-dashboard-left {
+    width: 55%;
+ }
+ app-dashboard-right {
+    width: 40%;
+ }

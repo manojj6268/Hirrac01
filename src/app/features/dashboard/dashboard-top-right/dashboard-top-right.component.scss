@@ -1,0 +1,99 @@
+.summary-cards {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 0;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e40af;
+    margin: 0 0 20px 0;
+  }
+  
+  .cards-grid {
+    display: grid;
+    /* two columns and three rows (keeps layout similar to your design) */
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  
+  .summary-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding: 12px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-width: 100px;
+    max-width: 100%;
+  }
+  
+  .summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  
+  .card-icon.posted-jobs { background: #3b82f6; }
+  .card-icon.applications { background: #fbbf24; }
+  .card-icon.shortlisted { background: #10b981; }
+  .card-icon.interview { background: #3b82f6; }
+  .card-icon.hired { background: #059669; }
+  .card-icon.rejected { background: #ef4444; }
+  
+  .card-icon-image {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+  
+  .card-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .card-number {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f2937;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  
+  .card-label {
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .cards-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .summary-card { padding: 10px; }
+  }
+  

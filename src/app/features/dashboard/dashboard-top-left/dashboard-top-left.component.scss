@@ -1,0 +1,250 @@
+// .profile-greeting {
+//   background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+//   border-radius: 16px;
+//   padding: 24px;
+//   color: white;
+//   position: relative;
+//   overflow: visible;
+// }
+
+// .greeting-content {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: relative;
+//   z-index: 2;
+// }
+
+// .text-content {
+//   flex: 1;
+//   max-width: 60%;
+// }
+
+// .greeting-title {
+//   font-size: 28px;
+//   font-weight: bold;
+//   margin: 0 0 12px 0;
+//   color: white;
+// }
+
+// .greeting-message {
+//   font-size: 16px;
+//   margin: 8px 0;
+//   color: rgba(255, 255, 255, 0.9);
+//   line-height: 1.4;
+// }
+
+// .view-all-link {
+//   color: white;
+//   text-decoration: underline;
+//   font-size: 14px;
+//   margin-top: 16px;
+//   display: inline-block;
+//   cursor: pointer;
+//   transition: color 0.2s ease;
+// }
+
+// .view-all-link:hover {
+//   color: rgba(255, 255, 255, 0.8);
+// }
+
+// /* Image placement */
+// .illustration {
+//   position: absolute;
+//   top: -100px; /* moves image above the card */
+//   right: -40px; /* moves image outside to the right */
+// }
+
+// .illustration-image {
+//   width: 220px;
+//   height: auto;
+//   border-radius: 12px;
+//   object-fit: contain;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+// }
+
+// /* Decorative circle */
+// .profile-greeting::before {
+//   content: '';
+//   position: absolute;
+//   top: -50px;
+//   right: -50px;
+//   width: 200px;
+//   height: 200px;
+//   background: rgba(255, 255, 255, 0.1);
+//   border-radius: 50%;
+//   z-index: 1;
+// }
+
+// @media (max-width: 768px) {
+//   .greeting-content {
+//     flex-direction: column;
+//     text-align: center;
+//   }
+
+//   .text-content {
+//     max-width: 100%;
+//     margin-bottom: 20px;
+//   }
+
+//   .illustration {
+//     position: relative;
+//     top: 0;
+//     right: 0;
+//     margin-top: 16px;
+//   }
+
+//   .illustration-image {
+//     width: 160px;
+//   }
+// }
+
+// new code css start here 
+// .container{
+//   width: 620px;
+//   height: 250px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+// }
+// .profile-greeting{
+//   width: 100%;
+//   height: 200px;
+//   position: relative;
+//   background: #fff;
+//   border: 1px solid #000000;
+// }
+// .greeting-content{
+//   width: 60px;
+//   height: 50%;
+//   position: absolute;
+//   top: -30px;
+//   right: 150px;
+//   z-index: 1;
+// }
+// .illustration-image{
+//   width: 200px;
+//   height: 200px;
+// }
+/* Container for centering */
+.container {
+  width: 100%;
+  height: 230px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+/* Card styling */
+.profile-greeting {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  //background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  background: #001C40;
+  border-radius: 16px;
+  padding: 15px;
+  color: #FFFFFF;
+  overflow: visible; /* allows image to appear outside */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Text content */
+.text-content {
+  flex: 1;
+  max-width: 60%;
+  height: 150px;
+  padding: 15px;
+}
+
+.greeting-title {
+  font-family: 'Open Sans';
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0 0 12px 0;
+}
+
+.greeting-message {
+  font-size: 15px;
+  margin: 8px 0;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.2;
+}
+
+.view-all-link {
+  color: white;
+  text-decoration: underline;
+  font-size: 13px;
+  margin-top: 10px;
+  display: inline-block;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Image container */
+.greeting-content {
+  position: absolute;
+  top: -70px;   /* float above the card */
+  right: 0px; 
+  /* float outside the card */
+  z-index: 3;
+  height: 100%;
+}
+
+/* Image styling */
+.illustration-image {
+  width: 200px;
+  height: 250px;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+/* Decorative circle */
+.profile-greeting::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-greeting {
+    flex-direction: column;
+    text-align: center;
+    height: auto;
+    padding: 20px;
+  }
+
+  .text-content {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .greeting-content {
+    position: relative;
+    top: 0;
+    right: 0;
+    margin-top: 16px;
+  }
+
+  .illustration-image {
+    width: 160px;
+  }
+}
+
+

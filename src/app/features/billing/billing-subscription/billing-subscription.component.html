@@ -1,0 +1,59 @@
+<div class="subscription-cards" *ngIf="subscriptionData && !loading">
+  <!-- Subscription Cards -->
+  <div class="standard-card" *ngFor="let plan of subscriptionData.plans; let i = index" 
+       [class.professional-card]="i === 1"
+       [class.selected]="selectedSubscription === plan.name"
+       (click)="onPlanSelect(plan.name)">
+    
+    <!-- Popular Tag for Professional -->
+    <div class="popular-tag" *ngIf="isPlanPopular(plan.name)">
+      <img src="assets/images/flame .png" alt="flame" class="flame-icon">
+      <span class="tag-text">Popular</span>
+    </div>
+
+    <div class="card-top">
+      <div class="plan-header">
+        <img [src]="plan.icon" [alt]="plan.name + ' icon'" width="24" height="24" class="plan-icon">
+        <h2 class="plan-name">{{ plan.name }}</h2>
+      </div>
+
+      <p class="plan-description">{{ plan.type }}</p>
+
+      <div class="price-section">
+        <span class="price">{{ getDisplayPrice(plan) }}</span>
+        <span class="price-period">{{ selectedPlan === 'yearly' ? 'per year*' : 'per month*' }}</span>
+      </div>
+
+      <button class="buy-button" 
+              [class.standard-button]="i === 0" 
+              [class.professional-button]="i === 1"
+              [class.loading]="selectedSubscription === plan.name"
+              [disabled]="selectedSubscription === plan.name"
+              (click)="onBuyNow(plan.name); $event.stopPropagation()">
+        <span *ngIf="selectedSubscription !== plan.name">Buy Now</span>
+        <span *ngIf="selectedSubscription === plan.name">Processing...</span>
+      </button>
+    </div>
+
+    <div class="card-bottom">
+      <h3 class="features-header">{{ plan.includes }}</h3>
+
+      <ul class="features-list">
+        <li class="feature-item" *ngFor="let feature of plan.features">
+          <span class="checkmark">✓</span>
+          <span class="feature-text">{{ feature }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="loading" *ngIf="loading">
+  <div class="loading-spinner"></div>
+  <p>Loading subscription plans...</p>
+</div>
+
+<div class="error-message" *ngIf="!loading && !subscriptionData">
+  <p>Failed to load subscription plans. Please try again later.</p>
+  <button class="retry-btn" (click)="loadSubscriptionData()">Retry</button>
+</div>

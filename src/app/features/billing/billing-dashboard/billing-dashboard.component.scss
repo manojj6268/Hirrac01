@@ -1,0 +1,20 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.main-container {
+    margin: 0;
+    padding: 0;
+}
+
+.billingTop-container {
+    margin-bottom: 0px;
+}
+
+.subscription-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 0px;
+    width: 100%;
+}
