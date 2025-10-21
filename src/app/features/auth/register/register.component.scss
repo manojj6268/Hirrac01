@@ -14,13 +14,14 @@ $forgot-orange: #ff8a00;
   justify-content: center;
   font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   padding: 1rem;
-  
+  background: #f4f6f8;
+  margin-top: -50px; /* Adjust for any global header height */
 }
 
 /* Card */
 .register-card {
   width: 100%;
-  max-width: 900px;
+  max-width: 980px;
   display: flex;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
@@ -31,7 +32,7 @@ $forgot-orange: #ff8a00;
 /* LEFT PANEL */
 .left-panel {
   flex: 1;
-  min-width: 480px;
+  min-width: 320px;
   background: $blue;
   color: $white;
   display: flex;
@@ -69,8 +70,8 @@ $forgot-orange: #ff8a00;
   padding: 2.5rem 2.25rem;
 
   /* ✅ Rounded corners only on the left edge (between blue & white panels) */
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .right-inner {

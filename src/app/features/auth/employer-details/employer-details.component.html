@@ -1,118 +1,126 @@
-<div class="registration-container">
-
+<div class="employer-details-page">
+  <div class="employer-details-card">
+    <!-- LEFT PANEL -->
     <div class="left-panel">
-        <div class="content">
-            <div class="illustration-placeholder">
-                <img src="../../../../assets/images/details.png.png" alt="Hiring Illustration">
-            </div>
-            <!-- <p class="slogan">Transforming hiring through smarter sourcing strategies.</p> -->
-        </div>
+      <div class="left-inner">
+        <img src="../../../../assets/images/details.png.png" alt="Hiring Illustration" class="team-img" />
+        <!-- <p class="left-tag">Transforming hiring through smarter sourcing strategies.</p> -->
+      </div>
     </div>
 
+    <!-- RIGHT PANEL -->
     <div class="right-panel">
-        <div class="form-wrapper">
-            <h2 class="form-title">Enter Your Basic Details</h2>
-            
-            <form [formGroup]="detailsForm" (ngSubmit)="onSave()">
+      <div class="right-inner">
+        <h1 class="title">Enter Your Basic Details</h1>
 
-                <div class="form-group">
-                    <label for="companyName">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-                        </svg>
-                        Company Name <span class="required">*</span>
-                    </label>
-                    <input type="text" id="companyName" placeholder="Enter company Name" formControlName="companyName">
-                </div>
+        <form class="employer-details-form" [formGroup]="detailsForm" (ngSubmit)="onSave()">
+          <!-- Company Name -->
+          <div class="form-row">
+            <label for="companyName" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+              </svg>
+              Company Name <span class="required">*</span>
+            </label>
+            <input type="text" id="companyName" placeholder="Enter company Name" formControlName="companyName">
+          </div>
 
-                <div class="form-group">
-                    <label for="gstin">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        GSTIN Number
-                    </label>
-                    <input type="text" id="gstin" placeholder="Enter GST Number" formControlName="gstin">
-                </div>
+          <!-- GSTIN Number -->
+          <div class="form-row">
+            <label for="gstin" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              GSTIN Number
+            </label>
+            <input type="text" id="gstin" placeholder="Enter GST Number" formControlName="gstin">
+          </div>
 
-                <div class="form-group">
-                    <label for="website">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                        Website Link <span class="required">*</span>
-                    </label>
-                    <input type="url" id="website" placeholder="Enter company website" formControlName="website">
-                </div>
+          <!-- Website Link -->
+          <div class="form-row">
+            <label for="website" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              Website Link <span class="required">*</span>
+            </label>
+            <input type="url" id="website" placeholder="Enter company website" formControlName="website">
+          </div>
 
-                <div class="form-group">
-                    <label for="industry">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                        Industry Type <span class="required">*</span>
-                    </label>
-                    <div class="select-wrapper">
-                        <select id="industry" formControlName="industry">
-                            <option value="" disabled selected>Select Your Industry</option>
-                            <option value="it">IT Services</option>
-                            <option value="finance">Finance</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <i class="fas fa-chevron-down select-arrow"></i>
-                    </div>
-                </div>
+          <!-- Industry Type -->
+          <div class="form-row">
+            <label for="industry" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              Industry Type <span class="required">*</span>
+            </label>
+            <div class="select-wrapper">
+              <select id="industry" formControlName="industry">
+                <option value="" disabled selected>Select Your Industry</option>
+                <option value="it">IT Services</option>
+                <option value="finance">Finance</option>
+                <option value="other">Other</option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
 
-                <div class="form-group">
-                    <label for="companySize">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.01 2.01 0 0017.94 6H6.06c-.88 0-1.66.58-1.92 1.37L1.5 16H4v6c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2zm-7-8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/>
-                        </svg>
-                        Company Size <span class="required">*</span>
-                    </label>
-                    <input type="text" id="companySize" placeholder="Enter Company Size" formControlName="companySize">
-                </div>
+          <!-- Company Size -->
+          <div class="form-row">
+            <label for="companySize" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A2.01 2.01 0 0017.94 6H6.06c-.88 0-1.66.58-1.92 1.37L1.5 16H4v6c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2zm-7-8c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z"/>
+              </svg>
+              Company Size <span class="required">*</span>
+            </label>
+            <input type="text" id="companySize" placeholder="Enter Company Size" formControlName="companySize">
+          </div>
 
-                <div class="form-group">
-                    <label for="location">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        Location <span class="required">*</span>
-                    </label>
-                    <input type="text" id="location" placeholder="Enter Company Addresses" formControlName="location">
-                </div>
+          <!-- Location -->
+          <div class="form-row">
+            <label for="location" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              Location <span class="required">*</span>
+            </label>
+            <input type="text" id="location" placeholder="Enter Company Addresses" formControlName="location">
+          </div>
 
-                <div class="form-group">
-                    <label for="foundedIn">
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
-                        </svg>
-                        Founded In <span class="required">*</span>
-                    </label>
-                    <div class="input-with-icon">
-                         <input type="text" id="foundedIn" placeholder="Enter Company Started Year" formControlName="foundedIn">
-                         <i class="fas fa-calendar-alt input-icon"></i>
-                    </div>
-                </div>
+          <!-- Founded In -->
+          <div class="form-row">
+            <label for="foundedIn" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+              </svg>
+              Founded In <span class="required">*</span>
+            </label>
+            <div class="input-with-icon">
+              <input type="text" id="foundedIn" placeholder="Enter Company Started Year" formControlName="foundedIn">
+              <i class="fas fa-calendar-alt input-icon"></i>
+            </div>
+          </div>
 
-                <div class="form-group file-upload-group">
-                    <label>
-                        <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
-                            <path fill="currentColor" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
-                        </svg>
-                        Upload Logo
-                    </label>
-                    <div class="custom-file-upload">
-                        <input type="file" id="uploadLogo" accept=".pdf, .png, .jpg, .jpeg" (change)="onFileChange($event)">
-                        <span class="upload-label">Upload Logo</span>
-                        <span class="file-hint">PDF, PNG, JPG file</span>
-                    </div>
-                </div>
+          <!-- Upload Logo -->
+          <div class="form-row file-upload-group">
+            <label class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+              </svg>
+              Upload Logo
+            </label>
+            <div class="custom-file-upload">
+              <input type="file" id="uploadLogo" accept=".pdf, .png, .jpg, .jpeg" (change)="onFileChange($event)">
+              <span class="upload-label">Upload Logo</span>
+              <span class="file-hint">PDF, PNG, JPG file</span>
+            </div>
+          </div>
 
-                <button type="submit" class="save-button">Save & Continue</button>
-
-            </form>
-        </div>
+          <!-- Submit -->
+          <button type="submit" class="btn primary">Save & Continue</button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>

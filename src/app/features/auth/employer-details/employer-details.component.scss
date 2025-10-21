@@ -1,238 +1,270 @@
-/* General Reset and Font */
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4; /* Subtle background for the page outside the container */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+/* Variables */
+$blue: #003399;
+$white: #ffffff;
+$muted: #6b7280;
+$input-border: #e5e7eb;
+$forgot-orange: #ff8a00;
+
+/* Page */
+.employer-details-page {
+//   height: 100vh;
+//   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  padding: 1rem;
+  background: #f4f6f8;
+  margin-top: -50px; /* Adjust for any global header height */
 }
 
-.registration-container {
-    display: flex;
-    width: 100%;
-    max-width: 1200px; /* Adjust as needed */
-    height: 800px; /* Fixed height for visual fidelity to the image */
-    background-color: #fff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+/* Card */
+.employer-details-card {
+  width: 100%;
+  max-width: 980px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  background: #053997;
+  border-radius: 0; /* remove outer radius */
 }
 
-/* --- Left Panel Styling --- */
+/* LEFT PANEL */
 .left-panel {
-    flex: 1; /* Equal width with right panel */
-    background-color: #053997; /* Dark Blue from the image */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #ffffff;
-    padding: 60px;
-    box-sizing: border-box;
-    position: relative;
-    /* Optional: Small curve at the bottom right corner like in the image */
-    
-}
+  flex: 1;
+  min-width: 480px;
+  background: $blue;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
 
-.left-panel .content {
+  .left-inner {
+    max-width: 340px;
     text-align: center;
-    max-width: 350px;
-}
+  }
 
-.illustration-placeholder img {
+  .team-img {
     width: 100%;
-    height: auto;
-    max-width: 350px;
-    margin-bottom: 40px;
-    /* In a real implementation, this placeholder image would be the actual complex illustration */
-    filter: grayscale(100%) brightness(200%); /* Placeholder effect */
-}
+    max-width: 280px;
+    margin: 0 auto 1.25rem;
+    display: block;
+  }
 
-.slogan {
-    font-size: 24px;
+  .left-tag {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.3;
     font-weight: 500;
-    line-height: 1.4;
+  }
 }
 
-/* --- Right Panel Styling (Form) --- */
+/* RIGHT PANEL */
 .right-panel {
-    flex: 1; /* Takes the remaining 60% of the space */
-    background-color: #ffffff;
-    padding: 60px 80px; /* Generous padding as seen in the image */
-    box-sizing: border-box;
-    overflow-y: auto;
-    // border-bottom-right-radius: 20px; /* Apply border-radius to one corner for visual effect */
-    
+  width: 480px;
+  background: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2.25rem;
+
+  /* ✅ Rounded corners only on the left edge (between blue & white panels) */
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
-.form-title {
-    font-size: 28px;
+.right-inner {
+  width: 100%;
+  max-width: 360px;
+}
+
+.title {
+  margin: 0 0 1.25rem 0;
+  text-align: center;
+  color: #111827;
+  font-size: 1.85rem;
+  font-weight: 700;
+}
+
+/* FORM */
+.employer-details-form {
+  .form-row {
+    margin-bottom: 1rem;
+
+    &.file-upload-group {
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+
+      .custom-file-upload {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 8px;
+        position: relative;
+
+        input[type="file"] {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          cursor: pointer;
+        }
+
+        .upload-label {
+          font-size: 0.95rem;
+          color: #9ca3af;
+          font-weight: 500;
+        }
+
+        .file-hint {
+          font-size: 0.8rem;
+          color: #9ca3af;
+        }
+      }
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      color: #374151;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+
+      .label-icon {
+        width: 16px;
+        height: 16px;
+        color: #6b7280;
+      }
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border-radius: 8px;
+      border: 1px solid $input-border;
+      font-size: 0.95rem;
+      color: #111827;
+
+      &::placeholder {
+        color: #9ca3af;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: $blue;
+        box-shadow: 0 0 0 4px rgba(0, 51, 153, 0.06);
+      }
+    }
+
+    .select-wrapper {
+      position: relative;
+
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-color: white;
+      }
+
+      .select-arrow {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #9ca3af;
+        font-size: 12px;
+      }
+    }
+
+    .input-with-icon {
+      position: relative;
+
+      input {
+        padding-right: 40px;
+      }
+
+      .input-icon {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: #9ca3af;
+      }
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.78rem;
+    border-radius: 8px;
     font-weight: 700;
-    color: #333333;
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    color: #333333;
-    font-weight: 500;
-    margin-bottom: 8px;
-}
-
-.label-icon {
-    width: 16px;
-    height: 16px;
-    color: #6b7280;
-}
-
-.required {
-    color: #E74C3C; /* Red color for asterisk */
-}
-
-/* Input, Select, and Placeholder Styles */
-input[type="text"],
-input[type="url"],
-select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 15px;
-    color: #333;
-}
-
-input::placeholder,
-.select-wrapper select option[disabled]:checked {
-    color: #999999; /* Lighter placeholder text */
-}
-
-/* Specific styling for the Industry Type select box */
-.select-wrapper {
-    position: relative;
-}
-
-.select-wrapper select {
-    appearance: none; /* Remove default arrow */
-    -webkit-appearance: none;
-    background-color: white; /* Ensure consistent background */
-}
-
-.select-wrapper .select-arrow {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #999999;
-    font-size: 12px;
-}
-
-/* Styling for Founded In date picker appearance */
-.input-with-icon {
-    position: relative;
-}
-
-.input-with-icon .input-icon {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #999999;
-}
-
-/* --- File Upload Styling --- */
-.file-upload-group {
-    margin-top: 30px;
-    margin-bottom: 40px;
-}
-
-.custom-file-upload {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #cccccc; /* Separator line */
-    padding-bottom: 8px;
-    position: relative;
-}
-
-.custom-file-upload input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
+    font-size: 0.95rem;
     cursor: pointer;
-}
-
-.upload-label {
-    font-size: 15px;
-    color: #999999;
-    font-weight: 500;
-}
-
-.file-hint {
-    font-size: 12px;
-    color: #999999;
-}
-
-
-/* --- Button Styling --- */
-.save-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #053997; /* Dark Blue from the left panel */
-    color: #ffffff;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 20px;
+    transition: all 0.18s ease;
+  }
+
+  .primary {
+    background: $blue;
+    color: $white;
+
+    &:hover {
+      background: darken($blue, 6%);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .required {
+    color: #E74C3C;
+  }
 }
 
-.save-button:hover {
-    background-color: #0d2c77;
-}
-
-
-/* --- Responsive Adjustments --- */
+/* RESPONSIVE */
 @media (max-width: 992px) {
-    .registration-container {
-        flex-direction: column;
-        height: auto;
-    }
+  .employer-details-card {
+    flex-direction: column;
+  }
 
-    .left-panel {
-        flex: 1 1 250px; /* Reduced height for mobile/tablet */
-        padding: 40px 20px;
-        border-bottom-right-radius: 0;
-    }
-    
-    .right-panel {
-        padding: 40px 40px;
-    }
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    padding: 2rem 1.25rem;
+    border-radius: 0;
+  }
+
+  /* Keep nice look on mobile */
+  .right-panel {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  }
 }
 
-@media (max-width: 600px) {
-    .right-panel {
-        padding: 30px 20px;
-    }
+@media (max-width: 480px) {
+  .employer-details-page {
+    min-height: auto;
+    padding: 1rem 0.6rem;
+  }
 
-    .form-title {
-        font-size: 24px;
-    }
-    
-    .slogan {
-        font-size: 20px;
-    }
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .left-tag {
+    font-size: 1rem;
+  }
 }
