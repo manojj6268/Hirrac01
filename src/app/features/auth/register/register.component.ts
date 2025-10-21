@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -25,13 +24,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  get email() { return this.registerForm.get('email'); }
-  get firstName() { return this.registerForm.get('firstName'); }
-  get lastName() { return this.registerForm.get('lastName'); }
-  get phone() { return this.registerForm.get('phone'); }
-  get password() { return this.registerForm.get('password'); }
-  get terms() { return this.registerForm.get('terms'); }
-
   togglePassword(): void {
     this.hide = !this.hide;
   }
@@ -42,7 +34,6 @@ export class RegisterComponent implements OnInit {
       return;
     }
     console.log('Register', this.registerForm.value);
-    // proceed to company details as example flow
     this.router.navigate(['/auth/employer-details']);
   }
 

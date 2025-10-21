@@ -24,14 +24,14 @@
 </div> -->
 
 <div class="app-root" [class.sidebar-open]="sidebarExpanded">
-    <app-header></app-header>
+    <app-header *ngIf="!isAuthRoute"></app-header>
     <div class="body-container">
-        <div class="sidebar-container">
+        <div class="sidebar-container" *ngIf="!isAuthRoute">
             <app-sidebar (expandedChange)="sidebarExpanded = $event"></app-sidebar>
         </div>
-    
+
         <!-- Option A: margin-left approach -->
-        <main class="router-main" [style.marginLeft.px]="sidebarExpanded ? 150 : 40">
+        <main class="router-main" [style.marginLeft.px]="sidebarExpanded && !isAuthRoute ? 150 : 40">
           <router-outlet></router-outlet>
         </main>
       </div>

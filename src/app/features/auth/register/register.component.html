@@ -1,33 +1,122 @@
-<div class="auth-page">
-  <div class="form-card">
-    <h1 class="form-title">Register</h1>
-
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" placeholder="Enter your full name" formControlName="fullName" />
+<div class="register-page">
+  <div class="register-card">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="left-inner">
+        <img src="../../../../assets/images/Register.png" alt="AI Hiring" class="team-img" />
+        <p class="left-tag">Smarter hiring with AI precision.</p>
       </div>
+    </div>
 
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="right-inner">
+        <h1 class="title">Create an employer account</h1>
+
+        <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Mail ID -->
+    <div class="form-row">
       <div class="form-group">
-        <label for="email">Email</label>
+        <div class="label">
+          <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M12 13.065L0 6.75v12h24v-12l-12 6.315zM12 11L0 4.5V6l12 6 12-6v-1.5L12 11z"/>
+          </svg>
+          Email *
+        </div>
         <input type="email" id="email" placeholder="Enter your email" formControlName="email" />
       </div>
+    </div>
 
+    <!-- First and Last Name -->
+    <div class="form-row">
+      <!-- First Name -->
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Create a password" formControlName="password" />
+        <div class="label">
+          <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5.33 0-8 2.67-8 8h16c0-5.33-2.67-8-8-8z"/>
+          </svg>
+          First Name *
+        </div>
+        <input type="text" id="firstName" placeholder="Enter First Name" formControlName="firstName" />
       </div>
 
+      <!-- Last Name -->
       <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" placeholder="Confirm your password" formControlName="confirmPassword" />
+        <div class="label">
+          <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5.33 0-8 2.67-8 8h16c0-5.33-2.67-8-8-8z"/>
+          </svg>
+          Last Name *
+        </div>
+        <input type="text" id="lastName" placeholder="Enter Last Name" formControlName="lastName" />
       </div>
+    </div>
 
-      <button type="submit" class="submit-btn">Register</button>
-
-      <div class="auth-link">
-        Already have an account? <a routerLink="/auth/login">Login</a>
+    <!-- Phone Number -->
+    <div class="form-row">
+      <div class="form-group">
+        <div class="label">
+          <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.21.48 2.53.74 3.88.74a1 1 0 011 1V20a1 1 0 01-1 1c-9.39 0-17-7.61-17-17a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.26 2.67.74 3.88a1 1 0 01-.27 1.11l-2.2 2.2z"/>
+          </svg>
+          Phone Number *
+        </div>
+        <input type="text" id="phone" placeholder="Enter Phone Number" formControlName="phone" />
       </div>
-    </form>
-  </div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-row">
+      <div class="form-group">
+        <div class="label">
+          <svg class="label-icon" viewBox="0 0 24 24" width="16" height="16">
+            <path fill="currentColor" d="M12 17a2 2 0 100-4 2 2 0 000 4zm6-6v-2a6 6 0 10-12 0v2H4v8h16v-8h-2z"/>
+          </svg>
+          Create Password *
+        </div>
+        <div class="password-wrap">
+          <input [type]="hide ? 'password' : 'text'" id="password" placeholder="************" formControlName="password" />
+          <button type="button" class="pass-toggle" (click)="togglePassword()">
+            <svg class="eye" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms Checkbox -->
+    <div class="checkbox-row">
+      <input type="checkbox" id="terms" formControlName="terms" />
+      <label for="terms">I have read and understood ProLegion's <a href="#">Privacy Policy</a> and <a href="#">Terms & Conditions</a></label>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn primary">Register</button>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>Or</span>
+    </div>
+
+    <!-- Social Login Buttons -->
+    <div class="socials">
+      <button type="button" class="social" (click)="onContinueWithGoogle()">
+        <img src="../../../../assets/images/google (1).png" alt="Google" />
+        Continue with Google
+      </button>
+
+      <button type="button" class="social" (click)="onContinueWithFacebook()">
+        <img src="../../../../assets/images/Facebook.png" alt="Facebook" />
+        Continue with Facebook
+      </button>
+    </div>
+
+    <!-- Login Link -->
+    <div class="login">
+      Already have an Account? <a routerLink="/auth/login">Login Here</a>
+    </div>
+  </form>
+</div>
+
 </div>
