@@ -14,6 +14,257 @@
 /* For brevity in this message I assume you've kept the original rules exactly as provided in the prompt. */
 /* === END ORIGINAL STYLES === */
 
+/* === NEW: Jobs list visual redesign (style-only) === */
+.jobs-header {
+  margin-bottom: 10px;
+}
+
+.jobs-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0b2459;
+  margin: 0 0 12px 0;
+}
+
+.filter-section {
+  background: #D7E5FF;
+  border-radius: 8px 8px 0 0;
+  padding: 12px;
+  // border: 1px solid rgba(13, 27, 84, 0.08);
+}
+
+.filter-controls {
+  display: grid;
+  grid-template-columns: 200px 200px 180px 1fr 110px;
+  gap: 12px;
+}
+
+.filter-dropdown .dropdown {
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(13, 27, 84, 0.15);
+  padding: 0 12px;
+  color: #0b2459;
+  font-weight: 600;
+}
+
+.search-control {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  height: 38px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid rgba(13, 27, 84, 0.15);
+  padding: 0 36px 0 12px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: #0b2459;
+}
+
+.search-button {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 18px;
+  background: #0f3bb6;
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+// .jobs-table-container {
+//   // margin-top: 14px;
+//   background: #f5f7fb;
+//   padding: 10px;
+//   border-radius: 10px;
+// }
+
+.jobs-table {
+  width: 100%;
+  border-collapse: collapse; /* remove gaps between thead/tbody */
+  border-spacing: 0; /* ensure no spacing */
+}
+
+.table-header th {
+  background: #0f3bb6;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: left;
+  padding: 12px 14px;
+  border-top-left-radius: 0; /* remove rounded corners */
+  border-top-right-radius: 0; /* remove rounded corners */
+  border: 0 !important; /* remove header borders/lines */
+  box-shadow: none; /* ensure no inner separators */
+}
+
+/* remove vertical separators between header cells */
+.table-header th + th {
+  border-left: 0 !important;
+}
+
+/* ensure thead has no borders */
+.jobs-table thead,
+.jobs-table thead tr {
+  border: 0 !important;
+}
+
+.table-header th.checkbox-column {
+  width: 44px;
+}
+
+thead {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+tbody {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Row cards */
+.table-row {
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+  border-radius: 8px;
+}
+
+.table-row > td {
+  padding: 14px;
+  border-top: 1px solid rgba(15, 23, 42, 0.04);
+}
+
+.table-row:first-child > td { border-top: none; }
+
+.checkbox-column {
+  width: 44px;
+}
+
+.job-title {
+  font-weight: 700;
+  color: #0b2459;
+}
+
+.date-posted {
+  color: #253b6e;
+  font-weight: 600;
+}
+
+/* Candidates mini-stats */
+.candidate-stats {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon.green { background: #e6f8ee; border: 1px solid #b6eccf; }
+.stat-icon.blue  { background: #eaf1ff; border: 1px solid #c6d7ff; }
+
+.icon-image {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.stat-text { line-height: 1; }
+.stat-number {
+  color: #0b6b3c; /* greenish */
+  font-weight: 800;
+  font-size: 13px;
+}
+.stat-label {
+  color: #91a0c8;
+  font-weight: 800;
+  font-size: 10px;
+  letter-spacing: 0.4px;
+}
+
+/* Email badge */
+.email-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 28px;
+  border-radius: 8px;
+  background: #eaf1ff;
+  color: #0f3bb6;
+  font-weight: 500;
+}
+
+/* Status pill */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.status-badge.open   { background: #e8f0ff; color: #0f3bb6; }
+.status-badge.paused { background: #fff1c6; color: #b77900; }
+.status-badge.closed { background: #ffe0e0; color: #c93731; }
+
+/* More menu trigger */
+.more-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+// /* Copyright footer */
+// .jobs-footer {
+//   display: flex;
+//   justify-content: flex-end;
+//   margin-top: 10px;
+// }
+
+// .copyright {
+//   color: #667085;
+//   font-size: 12px;
+// }
+
 /* === NEW: contextual menu + modal styles === */
 .more-actions {
   position: relative; /* ensure absolute children position relative here */

@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 interface Job {
   id: string;
@@ -32,7 +32,7 @@ export class JobsListComponent implements OnInit {
 
   searchQuery = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     // Sample data; replace by API in real app
@@ -79,7 +79,48 @@ export class JobsListComponent implements OnInit {
         type: 'Contract',
         pay: '₹6,00,000/per year'
       },
-      // add more if needed
+      {
+        id: '4',
+        title: 'Java Dev',
+        datePosted: '23th Sep, 2025',
+        status: 'Paused',
+        ownerInitials: 'YU',
+        location: 'Madhapur, Hyderabad 500081',
+        description: 'Java developer position working on backend services.',
+        benefits: ['Health insurance', 'PF'],
+        timeline: '12 Days',
+        openings: '02',
+        type: 'Full Time',
+        pay: '₹9,00,000/per year'
+      },
+      {
+        id: '5',
+        title: 'Angular',
+        datePosted: '20th Sep, 2025',
+        status: 'Closed',
+        ownerInitials: 'YU',
+        location: 'Madhapur, Hyderabad 500081',
+        description: 'Angular developer role for enterprise UI.',
+        benefits: ['Cell phone reimbursement'],
+        timeline: '8 Days',
+        openings: '01',
+        type: 'Full Time',
+        pay: '₹7,50,000/per year'
+      },
+      {
+        id: '6',
+        title: 'UI/UX Designer',
+        datePosted: '24th Sep, 2025',
+        status: 'Paused',
+        ownerInitials: 'YU',
+        location: 'Madhapur, Hyderabad 500081',
+        description: 'Senior UI/UX role focusing on design systems.',
+        benefits: ['Paid sick time', 'Health insurance'],
+        timeline: '14 Days',
+        openings: '02',
+        type: 'Full Time',
+        pay: '₹11,00,000/per year'
+      }
     ];
   }
 
@@ -100,6 +141,11 @@ export class JobsListComponent implements OnInit {
     const checked = (e.target as HTMLInputElement).checked;
     if (checked) {
       this.jobs.forEach(j => this.selectedJobs.add(j.id));
+      // Navigate to job details for the first job as per requirement
+      if (this.jobs.length > 0) {
+        const firstId = this.jobs[0].id;
+        this.router.navigate(['details', firstId], { relativeTo: this.route });
+      }
     } else {
       this.selectedJobs.clear();
     }

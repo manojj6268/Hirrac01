@@ -1,60 +1,58 @@
 <div class="adv-modal-backdrop" *ngIf="open" (click)="onClose()"></div>
 <div class="adv-modal" *ngIf="open" role="dialog" aria-modal="true" aria-label="Advanced Search">
   <div class="adv-header">
-    <h3>Advanced Search Filters</h3>
-    <button class="icon-btn" (click)="onClose()" aria-label="Close">×</button>
+    <h2>Advanced Search filters</h2>
+    <button class="close-btn" (click)="onClose()" aria-label="Close">
+      <span class="close-icon">×</span>
+      <span class="close-text">Close</span>
+    </button>
   </div>
 
-  <form [formGroup]="form" class="adv-grid">
-    <label class="field">
-      <span>Experience (years)</span>
-      <div class="row">
-        <input type="number" formControlName="experienceMin" min="0" placeholder="Min" />
-        <input type="number" formControlName="experienceMax" min="0" placeholder="Max" />
+  <div class="adv-groups">
+    <div class="group-card">
+      <div class="group-title">Job Experience</div>
+      <div class="group-list">
+        <label><input type="checkbox" /> <span>1 year</span></label>
+        <label><input type="checkbox" /> <span>2 year</span></label>
+        <label><input type="checkbox" /> <span>5 year</span></label>
+        <label><input type="checkbox" /> <span>10 year</span></label>
       </div>
-    </label>
+    </div>
 
-    <label class="field">
-      <span>Salary (LPA)</span>
-      <div class="row">
-        <input type="number" formControlName="salaryMin" min="0" placeholder="Min" />
-        <input type="number" formControlName="salaryMax" min="0" placeholder="Max" />
+    <div class="group-card">
+      <div class="group-title">Job Type</div>
+      <div class="group-list">
+        <label><input type="checkbox" /> <span>Fulltime</span></label>
+        <label><input type="checkbox" /> <span>Temporary/Contract</span></label>
+        <label><input type="checkbox" /> <span>Intern</span></label>
+        <label><input type="checkbox" /> <span>Part Time</span></label>
+        <label><input type="checkbox" /> <span>Seasonal</span></label>
       </div>
-    </label>
+    </div>
 
-    <label class="field">
-      <span>Notice Period</span>
-      <select formControlName="noticePeriod">
-        <option value="">Any</option>
-        <option value="0-15">0–15 days</option>
-        <option value="15-30">15–30 days</option>
-        <option value=">30">30+ days</option>
-      </select>
-    </label>
+    <div class="group-card">
+      <div class="group-title">Education</div>
+      <div class="group-list">
+        <label><input type="checkbox" /> <span>Graduation</span></label>
+        <label><input type="checkbox" /> <span>PG</span></label>
+        <label><input type="checkbox" /> <span>PhD</span></label>
+        <label><input type="checkbox" /> <span>Diploma</span></label>
+      </div>
+    </div>
 
-    <label class="check">
-      <input type="checkbox" formControlName="availableImmediately" />
-      <span>Available Immediately</span>
-    </label>
-
-    <label class="field">
-      <span>Current Company</span>
-      <input type="text" formControlName="company" placeholder="e.g., Acme Corp" />
-    </label>
-
-    <label class="field">
-      <span>Education</span>
-      <input type="text" formControlName="education" placeholder="e.g., Bachelors, Masters" />
-    </label>
-
-    <label class="field full">
-      <span>Skills</span>
-      <input type="text" placeholder="Comma separated" (blur)="onSkillsBlur($event)" [value]="(form.get('skills')?.value || []).join(', ')" />
-    </label>
-  </form>
+    <div class="group-card">
+      <div class="group-title">Notice Period</div>
+      <div class="group-list">
+        <label><input type="checkbox" /> <span>Immediate</span></label>
+        <label><input type="checkbox" /> <span>10 Days</span></label>
+        <label><input type="checkbox" /> <span>1 Month</span></label>
+        <label><input type="checkbox" /> <span>3 Months</span></label>
+      </div>
+    </div>
+  </div>
 
   <div class="adv-actions">
-    <button class="btn" type="button" (click)="onClose()">Cancel</button>
-    <button class="btn primary" type="button" (click)="onApply()">Apply Filters</button>
+    <button class="btn cancel" type="button" (click)="onClose()">Cancel</button>
+    <button class="btn primary" type="button" (click)="onApply()">Save</button>
   </div>
 </div>

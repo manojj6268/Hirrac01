@@ -16,7 +16,7 @@ export interface AdvancedFilters {
 @Component({
   selector: 'app-advanced-search-modal',
   templateUrl: './advanced-search-modal.component.html',
-  styleUrls: ['./advanced-search-modal.component.css']
+  styleUrls: ['./advanced-search-modal.component.scss']
 })
 export class AdvancedSearchModalComponent implements OnChanges {
   @Input() open = false;

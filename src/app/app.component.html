@@ -2,11 +2,11 @@
     <app-header *ngIf="!isAuthRoute"></app-header>
     <div class="body-container">
         <div class="sidebar-container" *ngIf="!isAuthRoute">
-            <app-sidebar (expandedChange)="sidebarExpanded = $event"></app-sidebar>
+            <app-sidebar (expandedChange)="sidebarExpanded = $any($event)"></app-sidebar>
         </div>
 
-        <!-- Option A: margin-left approach -->
-        <main class="router-main" [style.marginLeft.px]="sidebarExpanded && !isAuthRoute ? 150 : 40">
+        <!-- Margin-left matches sidebar width: 240 expanded, 60 collapsed -->
+        <main class="router-main" [style.marginLeft.px]="sidebarExpanded && !isAuthRoute ? 240 : 60">
           <router-outlet></router-outlet>
         </main>
       </div>

@@ -16,7 +16,8 @@ export class SidebarComponent {
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
-    this.expandedChange.emit(this.isCollapsed);
+    // emit true when expanded (not collapsed)
+    this.expandedChange.emit(!this.isCollapsed);
   }
 
   toggleDashboardView() {
