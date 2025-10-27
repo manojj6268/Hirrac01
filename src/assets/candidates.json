@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1",
+    "name": "Nissa Milla",
+    "lastUpdatedWeeks": 1,
+    "location": "Madhapur, Hyderabad",
+    "role": "Lead UI Designer",
+    "match": 98,
+    "contacted": false,
+    "timeAtJob": 2,
+    "skills": ["UI", "UX", "Figma", "available"],
+    "resumeText": "Experienced UI Designer with strong background in design systems and prototyping.",
+    "resumeUrl": "assets/resumes/nissa.pdf"
+  },
+  {
+    "id": "2",
+    "name": "Darlene Robertson",
+    "lastUpdatedWeeks": 1,
+    "location": "Madhapur, Hyderabad",
+    "role": "Lead UI Designer",
+    "match": 98,
+    "contacted": true,
+    "timeAtJob": 4,
+    "skills": ["UI", "React", "Figma"],
+    "resumeText": "Lead UI Designer specializing in enterprise web applications.",
+    "resumeUrl": "assets/resumes/darlene.pdf"
+  },
+  {
+    "id": "3",
+    "name": "Jenny Wilson",
+    "lastUpdatedWeeks": 2,
+    "location": "Gachibowli, Hyderabad",
+    "role": "Senior UX Designer",
+    "match": 95,
+    "contacted": false,
+    "timeAtJob": 1,
+    "skills": ["UX", "Figma", "Angular"],
+    "resumeText": "Senior UX Designer with research and interaction design focus.",
+    "resumeUrl": "assets/resumes/jenny.pdf"
+  },
+  {
+    "id": "4",
+    "name": "Jacob Jones",
+    "lastUpdatedWeeks": 2,
+    "location": "Kondapur, Hyderabad",
+    "role": "UI/UX Designer",
+    "match": 92,
+    "contacted": false,
+    "timeAtJob": 0.5,
+    "skills": ["UI", "UX", "available"],
+    "resumeText": "UI/UX Designer with rapid prototyping and visual design strengths.",
+    "resumeUrl": "assets/resumes/jacob.pdf"
+  }
+]

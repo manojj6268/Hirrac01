@@ -1,27 +1,77 @@
-<div class="auth-page">
-  <div class="form-card">
-    <h1 class="form-title">Login</h1>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter your email" formControlName="email" />
+<div class="login-page">
+  <div class="login-card" role="main" aria-labelledby="loginHeading">
+    <!-- LEFT -->
+    <div class="left-panel" aria-hidden="true">
+      <div class="left-inner">
+        <img src="../../../../assets/images/login.png.png" alt="Hiring Team" class="team-img" />
+        <p class="left-tag">“Welcome to your Hiring Dashboard”</p>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" formControlName="password" />
+    <!-- RIGHT -->
+    <div class="right-panel">
+      <div class="right-inner">
+        <h1 id="loginHeading" class="title">Welcome Back !</h1>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
+          <!-- Username -->
+          <div class="form-row">
+            <label for="username" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a5 5 0 100-10 5 5 0 000 10zM2 20a10 10 0 0120 0H2z"/></svg>
+              User Name
+            </label>
+            <input id="username" type="text" placeholder="Enter User Name" formControlName="email" />
+          </div>
+
+          <!-- Password with toggle -->
+          <div class="form-row">
+            <label for="password" class="label">
+              <svg class="label-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 17a2 2 0 10.001-4.001A2 2 0 0012 17zm6-6v-2a6 6 0 10-12 0v2H4v8h16v-8h-2z"/></svg>
+              Password
+            </label>
+
+            <div class="password-wrap">
+              <input
+                id="password"
+                [type]="hide ? 'password' : 'text'"
+                placeholder="Enter Password"
+                formControlName="password"
+              />
+              <button type="button" class="pass-toggle" (click)="togglePassword()" [attr.aria-pressed]="!hide" aria-label="Toggle password visibility">
+                <svg *ngIf="hide" viewBox="0 0 24 24" class="eye"><path fill="currentColor" d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7m0 12a5 5 0 110-10 5 5 0 010 10z"/></svg>
+                <svg *ngIf="!hide" viewBox="0 0 24 24" class="eye"><path fill="currentColor" d="M12 6a7 7 0 017 7 7 7 0 01-7 7 7 7 0 010-14m0 2a5 5 0 100 10 5 5 0 000-10z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Forgot password -->
+          <div class="forgot-row">
+            <a href="#" (click)="$event.preventDefault()" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn primary" [disabled]="loginForm.invalid">Login</button>
+
+          <!-- Divider -->
+          <div class="divider"><span>Or</span></div>
+
+          <!-- Social -->
+          <div class="socials">
+            <button type="button" (click)="onContinueWithGoogle()" class="btn social">
+              <img src="../../../../assets/images/google (1).png" alt="" /> Continue with Google
+            </button>
+
+            <button type="button" (click)="onContinueWithFacebook()" class="btn social">
+              <img src="../../../../assets/images/Facebook.png" alt="" /> Continue with Facebook
+            </button>
+          </div>
+
+          <!-- Register -->
+          <p class="register">
+            Not Register Yet? <a routerLink="/auth/register">Create an Account</a>
+          </p>
+        </form>
       </div>
-
-      <div class="forgot-password">
-        <a href="#" (click)="$event.preventDefault()">Forgot Password?</a>
-      </div>
-
-      <button type="submit" class="submit-btn">Login</button>
-
-      <div class="auth-link">
-        Don't have an account? <a routerLink="/auth/register">Register</a>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

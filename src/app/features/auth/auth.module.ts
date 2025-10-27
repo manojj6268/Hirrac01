@@ -16,6 +16,11 @@ import { EmployerDetailsComponent } from './employer-details/employer-details.co
     CommonModule,
     ReactiveFormsModule,
     AuthRoutingModule
+  ],
+  exports: [
+    LoginComponent,
+    RegisterComponent,
+    EmployerDetailsComponent
   ]
 })
 export class AuthModule { }

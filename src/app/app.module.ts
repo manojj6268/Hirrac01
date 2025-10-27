@@ -12,12 +12,11 @@ import { InterviewsModule } from './features/interviews/interviews.module';
 import { MessagesModule } from './features/messages/messages.module';
 import { BillingModule } from './features/billing/billing.module';
 import { CommonModule } from '@angular/common';
-import { SharedModule} from './shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './features/auth/auth.module';
 import { ServiceModule } from './service/service.module';
-
-
+import { SearchCandidateModule } from './features/search-candidate/search-candidate.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +25,7 @@ import { ServiceModule } from './service/service.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SearchCandidateModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatButtonModule,
@@ -39,7 +39,7 @@ import { ServiceModule } from './service/service.module';
     SharedModule,
     ReactiveFormsModule,
     AuthModule,
-    ServiceModule
+    ServiceModule,
 
   ],
   providers: [

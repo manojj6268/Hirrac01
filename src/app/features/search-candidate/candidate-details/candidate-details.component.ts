@@ -1,84 +1,201 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { CandidateService, Candidate } from '../../../service/candidate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-candidate-details',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './candidate-details.component.html',
-  styleUrls: ['./candidate-details.component.scss'],
+  styleUrls: ['./candidate-details.component.scss']
 })
-export class CandidateDetailsComponent implements OnInit{
-  
-candidate: Candidate | null = null;
-  activeTab: 'resume' | 'video' = 'resume';
+export class CandidateDetailsComponent implements OnInit {
+  jobTitle: string = '';
+  skills: string = '';
+  location: string = '';
+  showAdvancedFilters: boolean = false;
 
+  recentSearches: { title: string; location: string; criteria: string; date: Date; query: any }[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private candidateService: CandidateService
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
-    if (id) {
-      // In a real app, fetch candidate by ID
-      // For now, we'll use mock data
-      this.candidate = {
-        id: +id,
-        name: 'Nissa Milla',
-        role: 'Lead UI Designer',
-        location: 'Madhapur, Hyderabad',
-        skills: ['UI/UX', 'Figma', 'React'],
-        experience: '5+ years',
-        salary: '$80k - $100k',
-        availability: true,
-        image: 'assets/images/candidate1.jpg',
-        lastUpdated: '1 week ago',
-        matchPercentage: 98,
-        contacted: false,
-        timeAtJob: '2 years',
-        resumeUrl: 'https://example.com/resume1.pdf',
-        status: 'Shortlisted'
-      };
+    const raw = localStorage.getItem('recent_candidate_searches');
+    if (raw) {
+      try {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) {
+          this.recentSearches = parsed.map((x: any) => ({
+            title: x.title || '—',
+            location: x.location || '—',
+            criteria: x.criteria || '—',
+            date: x.date ? new Date(x.date) : new Date(),
+            query: x.query || {},
+          })).slice(0, 5);
+        }
+      } catch {}
     }
   }
 
-  setActiveTab(tab: 'resume' | 'video'): void {
-    this.activeTab = tab;
+  /**
+   * Triggered when the user clicks the main "Search" button.
+   * Navigates to CandidateSearchComponent with search parameters.
+   */
+  onSearch(): void {
+    const queryParams = {
+      jobTitle: this.jobTitle.trim(),
+      skills: this.skills.trim(),
+      location: this.location.trim(),
+    };
+
+    console.log('Searching candidates with:', queryParams);
+
+    // store into recent list (keep latest at top, max 5)
+    const title = queryParams.jobTitle || '—';
+    const location = queryParams.location || '—';
+    const criteria = queryParams.skills || '—';
+    this.recentSearches.unshift({
+      title,
+      location,
+      criteria,
+      date: new Date(),
+      query: queryParams,
+    });
+    this.recentSearches = this.recentSearches.slice(0, 5);
+    this.persistRecent();
+
+    this.router.navigate(['/search-candidate/search'], {
+      queryParams,
+    });
   }
 
-  goBack(): void {
-    this.router.navigate(['/candidate-search/results']);
+  /**
+   * Opens the advanced filters overlay/panel.
+   */
+  onAdvancedFilters(): void {
+    this.showAdvancedFilters = true;
   }
 
-  copyToClipboard(text: string): void {
-    navigator.clipboard.writeText(text);
-    // Could add a toast notification here
+  onAdvancedApply(filters: any): void {
+    this.showAdvancedFilters = false;
+    const queryParams = {
+      jobTitle: this.jobTitle.trim(),
+      skills: this.skills.trim(),
+      location: this.location.trim(),
+      ...filters,
+    };
+
+    const title = queryParams.jobTitle || '—';
+    const location = queryParams.location || '—';
+    const criteria = queryParams.skills || '—';
+    this.recentSearches.unshift({
+      title,
+      location,
+      criteria,
+      date: new Date(),
+      query: queryParams,
+    });
+    this.recentSearches = this.recentSearches.slice(0, 5);
+    this.persistRecent();
+
+    this.router.navigate(['/search-candidate/search'], { queryParams });
   }
 
-  downloadResume(): void {
-    if (this.candidate?.resumeUrl) {
-      const link = document.createElement('a');
-      link.href = this.candidate.resumeUrl;
-      link.download = `${this.candidate.name}_resume.pdf`;
-      link.click();
-    }
+  /**
+   * Closes the advanced filters overlay/panel.
+   */
+  onCloseFilters(): void {
+    this.showAdvancedFilters = false;
   }
 
-  toggleFavorite(): void {
-    // Implement favorite toggle logic
-    console.log('Toggle favorite for:', this.candidate?.name);
+  /**
+   * Called when user applies filters from AdvancedSearchFiltersComponent.
+   * Merges filters into the existing search and triggers navigation.
+   */
+  onApplyFilters(filters: any): void {
+    console.log('Applied filters:', filters);
+    this.showAdvancedFilters = false;
+
+    this.router.navigate(['/search-candidate/search'], {
+      queryParams: {
+        ...filters,
+        jobTitle: this.jobTitle,
+        skills: this.skills,
+        location: this.location,
+      },
+    
+    });
+
   }
 
-  navigateToAdvancedFilters(): void {
-    this.router.navigate(['/candidate-search/advanced']);
+  timeAgo(d: Date): string {
+    const diff = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
+    const days = Math.floor(diff / 86400);
+    if (days > 0) return `${days}d ago`;
+    const hours = Math.floor(diff / 3600);
+    if (hours > 0) return `${hours}h ago`;
+    const mins = Math.floor(diff / 60);
+    return `${mins}m ago`;
   }
 
-  navigateToCandidateResults(): void {
-    this.router.navigate(['/candidate-search/results']);
+  repeatSearch(item: { query: any }): void {
+    this.router.navigate(['/search-candidate/search'], { queryParams: item.query });
+  }
+
+  private persistRecent() {
+    try {
+      localStorage.setItem('recent_candidate_searches', JSON.stringify(this.recentSearches));
+    } catch {}
+  }
+  // Job Experience options
+  experienceOptions = [
+    { label: '1 year', checked: false },
+    { label: '2 years', checked: false },
+    { label: '5 years', checked: false },
+    { label: '10 years', checked: false }
+  ];
+
+  // Job Type options
+  typeOptions = [
+    { label: 'Fulltime', checked: false },
+    { label: 'Temporary', checked: false },
+    { label: 'Contract', checked: false },
+    { label: 'Part time', checked: false },
+    { label: 'Seasonal', checked: false }
+  ];
+
+  // Education options
+  educationOptions = [
+    { label: 'Graduation', checked: false },
+    { label: 'PG', checked: false },
+    { label: 'Diploma', checked: false }
+  ];
+
+  // Notice Period options
+  noticeOptions = [
+    { label: 'Immediate', checked: false },
+    { label: '1 month', checked: false },
+    { label: '3 months', checked: false }
+  ];
+
+  onCheckboxChange(option: any, category: string): void {
+    option.checked = !option.checked;
+  }
+
+  onSave(): void {
+    const selectedFilters = {
+      experience: this.experienceOptions.filter(opt => opt.checked).map(opt => opt.label),
+      type: this.typeOptions.filter(opt => opt.checked).map(opt => opt.label),
+      education: this.educationOptions.filter(opt => opt.checked).map(opt => opt.label),
+      notice: this.noticeOptions.filter(opt => opt.checked).map(opt => opt.label)
+    };
+    this.onApplyFilters(selectedFilters);
+    this.onClose();
+  }
+
+  onCancel(): void {
+    this.onClose();
+  }
+
+  onClose(): void {
+    this.showAdvancedFilters = false;
   }
 }
+
