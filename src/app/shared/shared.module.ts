@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
 import { ProfileSettingsComponent } from './profile-setting/profile-setting.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationSettingComponent } from './notification-setting/notification-setting.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
-import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -15,23 +13,20 @@ import { MatIconModule } from '@angular/material/icon';
     SidebarComponent,
    ProfileSettingsComponent,
    NotificationSettingComponent,
-   SideNavComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatIconModule
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
     SidebarComponent,
     ProfileSettingsComponent,
-    SideNavComponent,
+    RouterModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatIconModule
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }
