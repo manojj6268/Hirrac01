@@ -12,12 +12,7 @@
     <!-- Dashboard (keeps client-side toggle behavior) -->
     <a class="nav-item" title="Dashboard"  routerLink="/dashboard-profile" routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="7" height="7" />
-        <rect x="14" y="3" width="7" height="7" />
-        <rect x="14" y="14" width="7" height="7" />
-        <rect x="3" y="14" width="7" height="7" />
-      </svg>
+      <img class="nav-icon" src="assets/images/dashboardIcon1.png" alt="Dashboard icon" />
       <span class="nav-text">Dashboard</span>
     </a>
 
@@ -34,11 +29,7 @@
     <!-- Jobs -->
     <a class="nav-item" title="Jobs" routerLink="/jobs" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
+      <img class="nav-icon" src="assets/images/dashboard-jobsIcon.png" alt="Jobs icon" />
       <span class="nav-text">Jobs</span>
     </a>
 
@@ -52,8 +43,8 @@
       <span class="nav-text">Search candidate</span>
     </a>
 
-    <!-- Candidates -->
-    <a class="nav-item" title="Candidates" routerLink="/candidates" routerLinkActive="active"
+    <!--Applied Candidates -->
+    <a class="nav-item" title="Applied Candidates" routerLink="/applied-candidate-list" routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />

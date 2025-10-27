@@ -6,27 +6,34 @@
   
         <nav class="sidebar-nav">
           <button class="nav-item active">
-            <span class="nav-dot"></span>
+            <img src="assets/images/profile&securityIcon.png" alt="Profile & Security Icon" class="nav-icon">
             <span>Profile & Security</span>
           </button>
           <button class="nav-item" routerLink="/notification-setting" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
-            <span class="nav-dot hidden"></span>
+            <img src="assets/images/notification-settingIcon.png" alt="Notification Settings Icon" class="nav-icon">
             <span>Notification Settings</span>
           </button>
           <button class="nav-item" routerLink="/billing" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }">
-            <span class="nav-dot hidden"></span>
+            <img src="assets/images/sunscription&billingIcon.png" alt="Subscription & Billing Icon" class="nav-icon">
             <span>Subscription & Billing</span>
           </button>
-          <button class="nav-item">
-            <span class="nav-dot hidden"></span>
+          <button class="nav-item" routerLink="/support" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+            <img src="assets/images/support&helpIcon.png" alt="Support & Help Icon" class="nav-icon">
             <span>Support & Help</span>
           </button>
         </nav>
   
         <div class="company-section">
-          <h4>Company Settings</h4>
+          <nav class="sidebar-nav">
+            <button class="nav-item" routerLink="/company-setting" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+              <img src="assets/images/profile&securityIcon.png" alt="Company Settings Icon" class="nav-icon">
+              <span class="title">Company Settings</span>
+            </button>
+          </nav>
         </div>
       </div>
     </aside>

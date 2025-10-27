@@ -1,0 +1,146 @@
+
+<div class="page-shell" role="region" aria-label="Create job card area">
+  <div class="card" role="form" aria-label="Create job form card">
+    <div class="card-inner">
+      <!-- left column: form -->
+      <div class="left-col">
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <!-- Company Name -->
+          <div class="form-row">
+            <label class="field-label">
+              <span class="label-icon" aria-hidden="true">🏢</span>
+              <span class="label-text">Company Name</span>
+            </label>
+            <input
+              type="text"
+              formControlName="companyName"
+              placeholder="Enter company Name"
+              class="text-input"
+              aria-label="Company Name"
+            />
+            <div class="control-help" *ngIf="getControl('companyName').touched && getControl('companyName').invalid">
+              <!-- currently optional so no error -->
+            </div>
+          </div>
+
+          <!-- GSTIN Number -->
+          <div class="form-row">
+            <label class="field-label">
+              <span class="label-icon" aria-hidden="true">🔢</span>
+              <span class="label-text">GSTIN Number</span>
+            </label>
+            <input
+              type="text"
+              formControlName="gstin"
+              placeholder="Enter GST Number"
+              class="text-input"
+              aria-label="GSTIN Number"
+            />
+            <div class="control-help" *ngIf="getControl('gstin').touched && getControl('gstin').invalid">
+              <!-- optional field placeholder for errors -->
+            </div>
+          </div>
+
+          <!-- Website Link (required) -->
+          <div class="form-row required-row">
+            <label class="field-label">
+              <span class="label-icon" aria-hidden="true">🔗</span>
+              <span class="label-text">Website Link</span>
+            </label>
+            <span class="required-dot" aria-hidden="true"></span>
+            <input
+              type="url"
+              formControlName="website"
+              placeholder="Enter Company website"
+              class="text-input"
+              aria-required="true"
+              aria-label="Website Link"
+              [attr.aria-describedby]="getControl('website').touched && getControl('website').invalid ? 'err-website' : null"
+            />
+            <div id="err-website" class="error-msg" *ngIf="getControl('website').touched && getControl('website').hasError('required')">
+              Website is required.
+            </div>
+          </div>
+
+          <!-- Industry Type (required) -->
+          <div class="form-row required-row">
+            <label class="field-label">
+              <span class="label-icon" aria-hidden="true">🏷️</span>
+              <span class="label-text">Industry Type</span>
+            </label>
+            <span class="required-dot" aria-hidden="true"></span>
+
+            <div class="select-wrapper">
+              <select
+                formControlName="industry"
+                class="text-input select"
+                aria-label="Industry Type"
+                aria-required="true"
+                [attr.aria-describedby]="getControl('industry').touched && getControl('industry').invalid ? 'err-industry' : null"
+              >
+                <option value="" disabled selected hidden>Select Your Industry</option>
+                <option *ngFor="let i of industries" [value]="i">{{ i }}</option>
+              </select>
+              <span class="chevron" aria-hidden="true">▾</span>
+            </div>
+
+            <div id="err-industry" class="error-msg" *ngIf="getControl('industry').touched && getControl('industry').hasError('required')">
+              Industry is required.
+            </div>
+          </div>
+
+          <!-- Company Size (required) -->
+          <div class="form-row required-row">
+            <label class="field-label">
+              <span class="label-icon" aria-hidden="true">👥</span>
+              <span class="label-text">Company Size</span>
+            </label>
+            <span class="required-dot" aria-hidden="true"></span>
+            <input
+              type="text"
+              formControlName="companySize"
+              placeholder="Enter Company website"
+              class="text-input"
+              aria-required="true"
+              aria-label="Company Size"
+              [attr.aria-describedby]="getControl('companySize').touched && getControl('companySize').invalid ? 'err-size' : null"
+            />
+            <div id="err-size" class="error-msg" *ngIf="getControl('companySize').touched && getControl('companySize').hasError('required')">
+              Company size is required.
+            </div>
+           <!-- action button -->
+          <div class="action-row" aria-hidden="false">
+            <button
+              type="submit"
+              class="primary-btn"
+              [disabled]="submitting"
+              aria-label="Conform and Save"
+            >
+              Confirm &amp; Save
+            </button>
+
+            <!-- small ephemeral success toast text next to button -->
+            <div class="success-toast" *ngIf="showSuccess" role="status" aria-live="polite">
+              Saved ✓
+            </div>
+          </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- right column: logo -->
+      <div class="right-col" aria-hidden="false">
+        <div class="logo-wrapper" title="Logo">
+          <img
+            *ngIf="logoLoaded"
+            src="assets/images/logo.png"
+            alt="Logo"
+            class="logo-img"
+            (error)="onLogoError()"
+          />
+          <div *ngIf="!logoLoaded" class="logo-placeholder" aria-hidden="true">Logo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

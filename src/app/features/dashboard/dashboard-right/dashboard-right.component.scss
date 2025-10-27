@@ -296,9 +296,10 @@
 .dashboard-right-content{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    // justify-content: space-around;
     height: 100%;
     margin-top: 20px;
+    gap: 25px;
 }
 app-dashboard-top-right {
     height: 35%;

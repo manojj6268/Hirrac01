@@ -1,21 +1,22 @@
 /* src/app/features/messages/messages-panel/messages-panel.component.scss */
 
 .messages-panel {
-    display:flex; flex-direction:column; height:100%; background:#fff; overflow:hidden; width:100%;
+    display:flex; flex-direction:column; height:520px; background:#fff; overflow:hidden; width:100%;
   
     .panel-header {
-      padding:16px;
+      padding:5px;
+      padding-left: 20px;
       background:#eaf5ff;
       border-bottom:1px solid #e8eef6;
       .candidate-name { 
-        font-weight:700; 
+        font-weight:600; 
         font-size:16px; 
         color:#112a4a; 
         margin-bottom: 4px;
       }
       .candidate-meta { 
         color:#6b7280; 
-        font-size:13px; 
+        font-size:12px; 
         line-height: 1.4;
       }
     }

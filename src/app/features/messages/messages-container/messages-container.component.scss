@@ -3,17 +3,19 @@
 .messages-page {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 60px);
-    background: #f8f9fa;
+    // height: calc(100vh - 60px);
+    // background: #f8f9fa;
     padding: 5px;
     gap: 5px;
+    // width: 85vw;
   }
 
   .messages-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 15px 0px;
+    width: 80vw;
     
     .messages-title {
       font-size: 24px;
@@ -26,6 +28,7 @@
       position: relative;
       display: flex;
       align-items: center;
+      margin-right: 10px;
       
       .search-input {
         width: 300px;
@@ -54,9 +57,10 @@
     flex: 1;
     display: grid;
     grid-template-columns: 300px 1fr;
-    background: #f8f9fa;
+    // background: #f8f9fa;
     overflow: hidden;
-    min-height: 600px;
+    // min-height: 600px;
+    width: 100%;
   }
   
   @media (max-width: 900px) {

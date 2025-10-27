@@ -16,7 +16,7 @@
           <option>Angular Developer</option>
         </select>
       </div>
-
+      
       <div class="filter-dropdown">
         <select class="dropdown">
           <option>Location</option>
@@ -25,7 +25,7 @@
           <option>Remote</option>
         </select>
       </div>
-
+      
       <div class="filter-dropdown">
         <select class="dropdown">
           <option>Status</option>
@@ -34,16 +34,16 @@
           <option>Closed</option>
         </select>
       </div>
-
+      
       <div class="search-control">
         <div class="search-input-wrapper">
-          <input type="text" placeholder="Search" class="search-input" [(ngModel)]="searchQuery">
+          <input type="text" placeholder="Search" class="search-input">
           <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8"/>
             <path d="m21 21-4.35-4.35"/>
           </svg>
         </div>
-        <button class="search-button" (click)="onSearch()">Search</button>
+          <button class="search-button" (click)="onSearch()">Search</button>
       </div>
     </div>
   </div>
@@ -54,7 +54,8 @@
       <thead>
         <tr class="table-header">
           <th class="checkbox-column">
-            <input type="checkbox" class="select-all" (change)="toggleSelectAll($event)">
+            <input type="checkbox" class="select-all" (change)="onSelectAllAndGo($event)"
+                   [checked]="jobs.length > 0 && selectedJobs.size === jobs.length">
           </th>
           <th class="sortable">
             Job Title
@@ -71,17 +72,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr
-          class="table-row"
-          *ngFor="let job of jobs"
-          [attr.data-id]="job.id"
-        >
-          <td class="checkbox-column">
-            <input type="checkbox" [checked]="selectedJobs.has(job.id)" (click)="onJobSelect(job.id); $event.stopPropagation()">
-          </td>
-
-          <td class="job-title">{{ job.title }}</td>
-          <td class="date-posted">{{ job.datePosted }}</td>
+        <tr class="table-row" (click)="openPreviewById('1')">
+            <td class="checkbox-column">
+              <input type="checkbox" [checked]="selectedJobs.has('1')" (change)="onJobSelect('1')" (click)="$event.stopPropagation()">
+            </td>
+          <td class="job-title">UI/UX Designer</td>
+          <td class="date-posted">20th Sep, 2025</td>
           <td class="candidates">
             <div class="candidate-stats">
               <div class="stat-item">
@@ -104,51 +100,238 @@
               </div>
             </div>
           </td>
-
           <td class="email">
-            <div class="email-badge">{{ job.ownerInitials }}</div>
+            <div class="email-badge">YU</div>
           </td>
-
           <td class="status">
-            <span class="status-badge" [ngClass]="{
-              'open': job.status === 'Open',
-              'paused': job.status === 'Paused',
-              'closed': job.status === 'Closed'
-            }">
-              {{ job.status }} ↓
-            </span>
+            <span class="status-badge open">Open ↓</span>
           </td>
-
-          <td class="more-actions" (click)="$event.stopPropagation()" tabindex="-1">
-            <!-- three-dot button -->
-            <button
-              class="more-icon"
-              (click)="toggleMenu(job.id, $event)"
-              aria-haspopup="true"
-              [attr.aria-expanded]="openMenuId === job.id"
-              aria-label="More actions"
-            >⋮</button>
-
-            <!-- Contextual menu - positioned relative to cell -->
-            <div
-              *ngIf="openMenuId === job.id"
-              class="context-menu"
-              role="menu"
-              (keydown.escape)="closeMenu()"
-              tabindex="0"
-            >
-              <button class="menu-item" (click)="onView(job, $event)" role="menuitem">
-                <span class="menu-icon">👁️</span>
-                <span class="menu-label">View</span>
-              </button>
-              <button class="menu-item" (click)="onEdit(job, $event)" role="menuitem">
-                <span class="menu-icon">✏️</span>
-                <span class="menu-label">Edit</span>
-              </button>
-              <button class="menu-item delete" (click)="onDelete(job, $event)" role="menuitem">
-                <span class="menu-icon">🗑️</span>
-                <span class="menu-label">Delete</span>
-              </button>
+          <td class="more-actions">
+            <span class="more-icon" (click)="toggleMenu('1', $event)">⋮</span>
+            <div class="context-menu" *ngIf="openMenuId==='1'">
+              <button class="menu-item view" (click)="onView(getJobById('1')!, $event)"><span class="sprite eye"></span>View</button>
+              <button class="menu-item edit" (click)="onEdit(getJobById('1')!, $event)"><span class="sprite pencil"></span>Edit</button>
+              <button class="menu-item danger" (click)="onDelete(getJobById('1')!, $event)"><span class="sprite trash"></span>Delete</button>
+            </div>
+          </td>
+        </tr>
+        
+          <tr class="table-row" (click)="openPreviewById('2')">
+            <td class="checkbox-column">
+              <input type="checkbox" [checked]="selectedJobs.has('2')" (change)="onJobSelect('2')" (click)="$event.stopPropagation()">
+            </td>
+            <td class="job-title">React</td>
+          <td class="date-posted">21th Sep, 2025</td>
+          <td class="candidates">
+            <div class="candidate-stats">
+              <div class="stat-item">
+                <div class="stat-icon green">
+                  <img src="assets/images/candidateicon.png" alt="Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">ALL</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon blue">
+                  <img src="assets/images/candidateicon2.png" alt="New Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">NEW</div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="email">
+            <div class="email-badge">YU</div>
+          </td>
+          <td class="status">
+            <span class="status-badge paused">Paused ↓</span>
+          </td>
+          <td class="more-actions">
+            <span class="more-icon" (click)="toggleMenu('2', $event)">⋮</span>
+            <div class="context-menu" *ngIf="openMenuId==='2'">
+              <button class="menu-item view" (click)="onView(getJobById('2')!, $event)"><span class="sprite eye"></span><span>View</span></button>
+              <button class="menu-item edit" (click)="onEdit(getJobById('2')!, $event)"><span class="sprite pencil"></span><span>Edit</span></button>
+              <button class="menu-item danger" (click)="onDelete(getJobById('2')!, $event)"><span class="sprite trash"></span><span>Delete</span></button>
+            </div>
+          </td>
+        </tr>
+        
+          <tr class="table-row" (click)="openPreviewById('3')">
+            <td class="checkbox-column">
+              <input type="checkbox" [checked]="selectedJobs.has('3')" (change)="onJobSelect('3')" (click)="$event.stopPropagation()">
+            </td>
+            <td class="job-title">UI/UX Designer</td>
+            <td class="date-posted">22th Sep, 2025</td>
+          <td class="candidates">
+            <div class="candidate-stats">
+              <div class="stat-item">
+                <div class="stat-icon green">
+                  <img src="assets/images/candidateicon.png" alt="Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">ALL</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon blue">
+                  <img src="assets/images/candidateicon2.png" alt="New Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">NEW</div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="email">
+            <div class="email-badge">YU</div>
+          </td>
+          <td class="status">
+            <span class="status-badge closed">Closed ↓</span>
+          </td>
+          <td class="more-actions">
+            <span class="more-icon" (click)="toggleMenu('3', $event)">⋮</span>
+            <div class="context-menu" *ngIf="openMenuId==='3'">
+              <button class="menu-item view" (click)="onView(getJobById('3')!, $event)"><span class="sprite eye"></span><span>View</span></button>
+              <button class="menu-item edit" (click)="onEdit(getJobById('3')!, $event)"><span class="sprite pencil"></span><span>Edit</span></button>
+              <button class="menu-item danger" (click)="onDelete(getJobById('3')!, $event)"><span class="sprite trash"></span><span>Delete</span></button>
+            </div>
+          </td>
+        </tr>
+        
+          <tr class="table-row" (click)="openPreviewById('4')">
+            <td class="checkbox-column">
+              <input type="checkbox" [checked]="selectedJobs.has('4')" (change)="onJobSelect('4')" (click)="$event.stopPropagation()">
+            </td>
+            <td class="job-title">Java Dev</td>
+          <td class="date-posted">23th Sep, 2025</td>
+          <td class="candidates">
+            <div class="candidate-stats">
+              <div class="stat-item">
+                <div class="stat-icon green">
+                  <img src="assets/images/candidateicon.png" alt="Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">ALL</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon blue">
+                  <img src="assets/images/candidateicon2.png" alt="New Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">NEW</div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="email">
+            <div class="email-badge">YU</div>
+          </td>
+          <td class="status">
+            <span class="status-badge paused">Paused ↓</span>
+          </td>
+          <td class="more-actions">
+            <span class="more-icon" (click)="toggleMenu('4', $event)">⋮</span>
+            <div class="context-menu" *ngIf="openMenuId==='4'">
+              <button class="menu-item view" (click)="onView(getJobById('4')!, $event)"><span class="sprite eye"></span><span>View</span></button>
+              <button class="menu-item edit" (click)="onEdit(getJobById('4')!, $event)"><span class="sprite pencil"></span><span>Edit</span></button>
+              <button class="menu-item danger" (click)="onDelete(getJobById('4')!, $event)"><span class="sprite trash"></span><span>Delete</span></button>
+            </div>
+          </td>
+        </tr>
+        
+          <tr class="table-row" (click)="openPreviewById('5')">
+            <td class="checkbox-column">
+              <input type="checkbox" [checked]="selectedJobs.has('5')" (change)="onJobSelect('5')" (click)="$event.stopPropagation()">
+            </td>
+            <td class="job-title">Angular</td>
+          <td class="date-posted">20th Sep, 2025</td>
+          <td class="candidates">
+            <div class="candidate-stats">
+              <div class="stat-item">
+                <div class="stat-icon green">
+                  <img src="assets/images/candidateicon.png" alt="Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">ALL</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon blue">
+                  <img src="assets/images/candidateicon2.png" alt="New Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">NEW</div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="email">
+            <div class="email-badge">YU</div>
+          </td>
+          <td class="status">
+            <span class="status-badge closed">Closed ↓</span>
+          </td>
+          <td class="more-actions">
+            <span class="more-icon" (click)="toggleMenu('5', $event)">⋮</span>
+            <div class="context-menu" *ngIf="openMenuId==='5'">
+              <button class="menu-item view" (click)="onView(getJobById('5')!, $event)"><span class="sprite eye"></span><span>View</span></button>
+              <button class="menu-item edit" (click)="onEdit(getJobById('5')!, $event)"><span class="sprite pencil"></span><span>Edit</span></button>
+              <button class="menu-item danger" (click)="onDelete(getJobById('5')!, $event)"><span class="sprite trash"></span><span>Delete</span></button>
+            </div>
+          </td>
+        </tr>
+        
+          <tr class="table-row" (click)="openPreviewById('6')">
+            <td class="checkbox-column">
+              <input type="checkbox" [checked]="selectedJobs.has('6')" (change)="onJobSelect('6')" (click)="$event.stopPropagation()">
+            </td>
+            <td class="job-title">UI/UX Designer</td>
+            <td class="date-posted">24th Sep, 2025</td>
+          <td class="candidates">
+            <div class="candidate-stats">
+              <div class="stat-item">
+                <div class="stat-icon green">
+                  <img src="assets/images/candidateicon.png" alt="Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">ALL</div>
+                </div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon blue">
+                  <img src="assets/images/candidateicon2.png" alt="New Candidates" class="icon-image">
+                </div>
+                <div class="stat-text">
+                  <div class="stat-number">10</div>
+                  <div class="stat-label">NEW</div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="email">
+            <div class="email-badge">YU</div>
+          </td>
+          <td class="status">
+            <span class="status-badge paused">Paused ↓</span>
+          </td>
+          <td class="more-actions">
+            <span class="more-icon" (click)="toggleMenu('6', $event)">⋮</span>
+            <div class="context-menu" *ngIf="openMenuId==='6'">
+              <button class="menu-item view" (click)="onView(getJobById('6')!, $event)"><span class="sprite eye"></span><span>View</span></button>
+              <button class="menu-item edit" (click)="onEdit(getJobById('6')!, $event)"><span class="sprite pencil"></span><span>Edit</span></button>
+              <button class="menu-item danger" (click)="onDelete(getJobById('6')!, $event)"><span class="sprite trash"></span><span>Delete</span></button>
             </div>
           </td>
         </tr>
@@ -156,56 +339,17 @@
     </table>
   </div>
 
+  <!-- Preview Modal Overlay -->
+  <div class="preview-overlay" *ngIf="isModalOpen" (click)="closeModal()" role="dialog" aria-modal="true">
+    <div class="preview-container" (click)="$event.stopPropagation()">
+      <app-job-preview (close)="closeModal()"></app-job-preview>
+    </div>
+    <button class="overlay-close" (click)="closeModal()" aria-label="Close preview">×</button>
+    <div class="overlay-backdrop"></div>
+  </div>
+
   <!-- Footer -->
   <div class="jobs-footer">
     <p class="copyright">Hirrac 2025</p>
-  </div>
-
-  <!-- Modal Preview -->
-  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeModal()" (keydown.escape)="closeModal()" tabindex="-1">
-    <div class="modal-card" (click)="$event.stopPropagation()" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-header">
-        <div class="modal-title-row">
-          <div class="modal-job-title">
-            <strong id="modalTitle">{{ selectedJob?.title }}</strong>
-            <div class="modal-meta">
-              <span class="modal-location">📍 {{ selectedJob?.location }}</span>
-              <span class="modal-date">📅 {{ selectedJob?.datePosted }}</span>
-            </div>
-          </div>
-          <button class="modal-close" aria-label="Close" (click)="closeModal()">✖</button>
-        </div>
-      </div>
-
-      <div class="modal-body">
-        <div class="modal-left">
-          <h3 class="section-heading">JOB DESCRIPTION</h3>
-          <div class="job-desc">
-            <p>{{ selectedJob?.description }}</p>
-          </div>
-
-          <h3 class="section-heading">BENEFITS</h3>
-          <div class="benefits">
-            <span class="benefit-chip" *ngFor="let b of selectedJob?.benefits">{{ b }}</span>
-          </div>
-        </div>
-
-        <div class="modal-right">
-          <div class="job-details-card">
-            <h4 class="right-title">JOB DETAILS</h4>
-            <div class="detail-row"><strong>Job Title</strong><div>{{ selectedJob?.title }}</div></div>
-            <div class="detail-row"><strong>Location</strong><div>{{ selectedJob?.location }}</div></div>
-            <div class="detail-row"><strong>Recruitment timeline for this job</strong><div>{{ selectedJob?.timeline }}</div></div>
-            <div class="detail-row"><strong>No of Openings</strong><div>{{ selectedJob?.openings }}</div></div>
-            <div class="detail-row"><strong>Job Type</strong><div>{{ selectedJob?.type }}</div></div>
-            <div class="detail-row"><strong>Pay</strong><div>{{ selectedJob?.pay }}</div></div>
-          </div>
-
-          <div class="modal-actions">
-            <button class="primary-btn" (click)="confirmAndPost(selectedJob)">Conform &amp; Post</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

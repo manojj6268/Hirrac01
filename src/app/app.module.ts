@@ -13,9 +13,10 @@ import { MessagesModule } from './features/messages/messages.module';
 import { BillingModule } from './features/billing/billing.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule} from './shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './features/auth/auth.module';
 import { ServiceModule } from './service/service.module';
+import { AppliedCandidatesModule } from './features/applied-candidates/applied-candidates.module';
 
 
 @NgModule({
@@ -39,7 +40,10 @@ import { ServiceModule } from './service/service.module';
     SharedModule,
     ReactiveFormsModule,
     AuthModule,
-    ServiceModule
+    ServiceModule,
+    AppliedCandidatesModule,
+    FormsModule,
+    HttpClientModule,
 
   ],
   providers: [

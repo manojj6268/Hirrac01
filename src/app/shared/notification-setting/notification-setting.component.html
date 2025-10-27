@@ -1,6 +1,5 @@
 <div class="page-wrap">
-    <!-- Sidebar -->
-    <aside class="sidebar">
+    <!-- <aside class="sidebar">
       <div class="sidebar-inner">
         <h3 class="sidebar-title">Profile Settings</h3>
   
@@ -10,8 +9,7 @@
             class="nav-item"
             [class.active]="activeRoute === item.route"
             (click)="navigateTo(item.route)"
-            type="button"
-          >
+            type="button">
             <span class="nav-dot" [class.hidden]="activeRoute !== item.route"></span>
             <span class="nav-label">{{ item.label }}</span>
           </button>
@@ -21,14 +19,47 @@
           <h4>Company Settings</h4>
         </div>
       </div>
+    </aside> -->
+  
+     <aside class="sidebar">
+      <div class="sidebar-inner">
+        <h3 class="sidebar-title">Profile Settings</h3>
+  
+        <nav class="sidebar-nav">
+          <button class="nav-item">
+            <img src="assets/images/profile&securityIcon.png" alt="Profile & Security Icon" class="nav-icon">
+            <span>Profile & Security</span>
+          </button>
+          <button class="nav-item" routerLink="/notification-setting" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+            <img src="assets/images/notification-settingIcon.png" alt="Notification Settings Icon" class="nav-icon">
+            <span>Notification Settings</span>
+          </button>
+          <button class="nav-item" routerLink="/billing" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+            <img src="assets/images/sunscription&billingIcon.png" alt="Subscription & Billing Icon" class="nav-icon">
+            <span>Subscription & Billing</span>
+          </button>
+          <button class="nav-item support-gap" routerLink="/support" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }">
+            <img src="assets/images/support&helpIcon.png" alt="Support & Help Icon" class="nav-icon">
+            <span>Support & Help</span>
+          </button>
+          <div class="company-section">
+            <button class="nav-item" routerLink="/company-setting" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }">
+              <span class="title">Company Settings</span>
+            </button>
+          </div>
+        </nav>
+      </div>
     </aside>
   
-    <!-- Main content -->
     <main class="main-card">
       <div class="card">
-        <div class="content-header">
+        <!-- <div class="content-header">
           <h4>Notification Settings</h4>
-        </div>
+        </div> -->
   
         <div class="settings-list">
           <div class="setting-item">

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-job-preview',
@@ -7,11 +6,17 @@ import { Router } from '@angular/router';
   styleUrl: './job-preview.component.scss'
 })
 export class JobPreviewComponent {
-
-  constructor(private router: Router) {}
+  @Output() close = new EventEmitter<void>();
 
   onClose() {
-    // Navigate back to jobs list
-    this.router.navigate(['/jobs']);
+    // Emit close so parent can handle overlay close
+    this.close.emit();
+  }
+
+  toggleBenefit(event: Event) {
+    const el = event.currentTarget as HTMLElement;
+    if (el) {
+      el.classList.toggle('selected');
+    }
   }
 }

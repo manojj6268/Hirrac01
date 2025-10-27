@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationSettingComponent } from './notification-setting/notification-setting.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { MatIconModule } from '@angular/material/icon';
+import { SupportComponent } from './support/support.component';
+import { CompanySettingComponent } from './company-setting/company-setting.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
    ProfileSettingsComponent,
    NotificationSettingComponent,
    SideNavComponent,
+   SupportComponent,
+   CompanySettingComponent,
   ],
   imports: [
     CommonModule,

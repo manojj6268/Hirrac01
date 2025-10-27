@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardstartupComponent } from './features/dashboard/dashboardstartup/dashboardstartup.component';
 import { AnalyticsComponent } from './features/analytics/analytics.component';
@@ -11,6 +11,8 @@ import { ProfileSettingsComponent } from './shared/profile-setting/profile-setti
 import { DashboardProfileComponent } from './features/dashboard/dashboard-profile/dashboard-profile.component';
 import { NotificationSettingComponent } from './shared/notification-setting/notification-setting.component';
 import { CreateJobComponent } from './features/post-jobs/create-job/create-job.component';
+import { SupportComponent } from './shared/support/support.component';
+import { CompanySettingComponent } from './shared/company-setting/company-setting.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -24,8 +26,9 @@ const routes: Routes = [
   { path: 'billing', component: BillingDashboardComponent },
   { path: 'profile-setting', component: ProfileSettingsComponent },
   { path: 'notification-setting', component: NotificationSettingComponent },
+  {path: 'support', component: SupportComponent},
   {path:'post-jobs',component: CreateJobComponent},
-
+  {path: 'company-setting', component: CompanySettingComponent},
   { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
 
   {path: 'jobs',
@@ -45,6 +48,10 @@ const routes: Routes = [
   { path: 'search-candidate',
     loadChildren: () =>
       import('./features/search-candidate/search-candidate.module').then(m => m.SearchCandidateModule),
+  },
+  { path: 'applied-candidate-list',
+    loadChildren: () =>
+      import('./features/applied-candidates/applied-candidates.module').then(m => m.AppliedCandidatesModule),
   },
 
 ];

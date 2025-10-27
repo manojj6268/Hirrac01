@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MessagesContainerComponent } from './messages-container/messages-container.component';
 import { MessagesListComponent } from './messages-list/messages-list.component';
 import { MessagesPanelComponent } from './messages-panel/messages-panel.component';
+import { MessagesRoutingModule } from './messages-routing.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { MessagesPanelComponent } from './messages-panel/messages-panel.componen
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    MessagesRoutingModule,
   ],
   exports: [
     MessagesContainerComponent,

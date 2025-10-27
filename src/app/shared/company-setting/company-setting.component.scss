@@ -1,0 +1,263 @@
+// component-level variables
+$primary-blue: #0a53b7;
+$muted: #71777f;
+$bg: #f3f5f7;
+$card-bg: #ffffff;
+$card-border: #e6e9ec;
+$card-shadow: 0 6px 18px rgba(18, 35, 56, 0.06);
+$input-border: #d7dbe0;
+$error-red: #d9534f;
+$border-radius: 12px;
+$pill-radius: 24px;
+$spacing: 16px;
+
+:host {
+  display: block;
+  padding: 24px;
+  background: $bg;
+}
+
+/* center card on page and constrain width similar to screenshot */
+.page-shell {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.card {
+  width: min(1060px, 95%);
+  background: $card-bg;
+  border: 1px solid $card-border;
+  box-shadow: $card-shadow;
+  border-radius: 12px;
+  padding: 28px;
+}
+
+/* inner layout: left (form) wider; right narrow for logo */
+.card-inner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* left column styling */
+.left-col {
+  flex: 1 1 70%;
+  min-width: 560px;
+}
+
+/* right column for logo (narrow) */
+.right-col {
+  width: 160px;
+  // display: flex;
+  // justify-content: flex-end;
+  // position: relative;
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+/* form row */
+.form-row {
+  display: block;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+/* label with small icon on left */
+.field-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: $muted;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.label-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 13px;
+}
+
+/* inputs */
+.text-input {
+  display: block;
+  width: 520px; /* match screenshot input widths visually */
+  max-width: 100%;
+  padding: 12px 14px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid $input-border;
+  background: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+  transition: box-shadow 0.12s, border-color 0.12s;
+}
+
+.text-input:focus {
+  border-color: darken($input-border, 8%);
+  box-shadow: 0 2px 8px rgba(10, 83, 183, 0.06);
+}
+
+/* select wrapper so chevron can be positioned */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 520px;
+  max-width: 100%;
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 34px;
+}
+
+/* chevron on right */
+.chevron {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: $muted;
+}
+
+/* required dot placed near right side of the row (matches screenshot little red dots) */
+.required-row {
+  position: relative;
+}
+
+// .required-dot {
+//   position: absolute;
+//   right: -28px;
+//   top: 24px;
+//   display: inline-block;
+//   width: 8px;
+//   height: 8px;
+//   background: $error-red;
+//   border-radius: 50%;
+//   box-shadow: 0 0 0 2px rgba(217, 83, 79, 0.06);
+// }
+
+/* error messages */
+.error-msg {
+  margin-top: 8px;
+  font-size: 12px;
+  color: $error-red;
+}
+
+/* subtle muted helper */
+.control-help {
+  margin-top: 6px;
+  font-size: 12px;
+  color: $muted;
+}
+
+/* Spacer to push button down near bottom-right as in screenshot */
+.form-spacer {
+  height: 56px;
+}
+
+/* action row aligned to bottom-right */
+.action-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+/* primary button pill */
+.primary-btn {
+  background: $primary-blue;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: $pill-radius;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(10, 83, 183, 0.14);
+  min-width: 150px;
+      position: relative;
+    top: -40px;
+    left: 130px;
+}
+
+.primary-btn[disabled] {
+  opacity: 0.7;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* small success toast text */
+.success-toast {
+  font-size: 13px;
+  color: #166534;
+  padding-left: 6px;
+}
+
+/* right column logo styling */
+.logo-wrapper {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1px solid $input-border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(10, 35, 56, 0.04);
+  margin-bottom: 10px;
+}
+
+.logo-img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  display: block;
+  border-radius: 50%;
+}
+
+
+/* fallback placeholder when logo missing */
+.logo-placeholder {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, #f5f7fa, #ffffff);
+  color: $muted;
+  font-weight: 700;
+}
+
+/* small responsiveness */
+@media (max-width: 860px) {
+  .card-inner {
+    flex-direction: column;
+  }
+  .left-col {
+    min-width: 0;
+  }
+  .right-col {
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .text-input,
+  .select-wrapper {
+    width: 100%;
+  }
+
+}
+

@@ -45,6 +45,14 @@
     .expanded & .collapse-button .collapse-icon { transform: rotate(180deg); }
   }
 
+  /* when expanded, align collapse button to the right within header */
+  &.expanded {
+    .sidebar-header {
+      justify-content: flex-end;
+      padding-right: 12px;
+    }
+  }
+
   .sidebar-content {
     flex: 1;
     display: flex;
@@ -68,7 +76,7 @@
   width: 50px;
   height: 50px;
   padding: 0;
-  border-radius: 12px;
+  border-radius: 0;
   cursor: pointer;
   transition: background 0.12s ease, width 0.15s ease, padding 0.15s ease;
   color: #fff;
@@ -82,6 +90,28 @@
   width: 24px;
   height: 24px;
   stroke: #fff;
+}
+
+/* colorize Dashboard icon blue on active (exact brand blue #053997 approximation via CSS filter) */
+// Dashboard styles: white background + red right border always
+.sidebar .nav-item[title="Dashboard"] {
+  background: #FFFFFF;
+  border-right: 5px solid #ED1825;
+}
+
+.sidebar .nav-item[title="Dashboard"].active,
+.sidebar .nav-item[title="Dashboard"].router-link-active,
+.sidebar .nav-item[title="Dashboard"]:focus,
+.sidebar .nav-item[title="Dashboard"]:focus-visible {
+  background: #FFFFFF;
+  border-right: 5px solid #ED1825;
+  outline: none;
+}
+
+/* Dashboard icon (PNG/img): brand blue color */
+.sidebar .nav-item[title="Dashboard"] .nav-icon {
+  /* filter approximation for #053997 on white glyph */
+  filter: invert(15%) sepia(98%) saturate(2400%) hue-rotate(209deg) brightness(92%) contrast(102%);
 }
 
 /* label default hidden */
@@ -115,6 +145,11 @@
   transform: translateX(0);
   margin-left: 8px;
   max-width: 200px;
+}
+
+/* When expanded, Dashboard label color matches icon (always) */
+.sidebar.expanded .nav-item[title="Dashboard"] .nav-text {
+  color: #053997;
 }
 
 /* mobile adjustments */
