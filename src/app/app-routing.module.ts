@@ -1,5 +1,7 @@
-import { Component, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+// App Components
 import { DashboardstartupComponent } from './features/dashboard/dashboardstartup/dashboardstartup.component';
 import { AnalyticsComponent } from './features/analytics/analytics.component';
 import { CandidatesComponent } from './features/candidates/candidates.component';
@@ -24,29 +26,43 @@ const routes: Routes = [
   { path: 'billing', component: BillingDashboardComponent },
   { path: 'profile-setting', component: ProfileSettingsComponent },
   { path: 'notification-setting', component: NotificationSettingComponent },
-  {path:'post-jobs',component: CreateJobComponent},
+  { path: 'post-jobs', component: CreateJobComponent },
 
-  { path: 'auth', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
-
-  {path: 'jobs',
+  // Lazy-loaded modules
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: 'jobs',
     loadChildren: () =>
       import('./features/jobs/jobs.module').then((m) => m.JobsModule),
   },
-  { path: 'post-jobs',
+  {
+    path: 'post-jobs',
     loadChildren: () =>
-      import('./features/post-jobs/post-jobs.module').then(m => m.PostJobsModule),
+      import('./features/post-jobs/post-jobs.module').then(
+        (m) => m.PostJobsModule
+      ),
   },
-  // wildcard fallback
+  {
+    path: 'messages',
+    loadChildren: () =>
+      import('./features/messages/messages.module').then(
+        (m) => m.MessagesModule
+      ),
+  },
+  {
+    path: 'search-candidate',
+    loadChildren: () =>
+      import('./features/search-candidate/search-candidate.module').then(
+        (m) => m.SearchCandidateModule
+      ),
+  },
 
-  { path: 'messages',
-    loadChildren: () =>
-      import('./features/messages/messages.module').then(m => m.MessagesModule),
-  },
-  { path: 'search-candidate',
-    loadChildren: () =>
-      import('./features/search-candidate/search-candidate.module').then(m => m.SearchCandidateModule),
-  },
-
+  // Wildcard fallback
+  { path: '**', redirectTo: 'dashboard' },
 ];
 
 @NgModule({

@@ -1,28 +1,3 @@
-<!-- <div class="container">
-    <div class="header-div">
-      <app-header></app-header>
-    </div>
-    <div class="body-container">
-       <app-sidebar></app-sidebar>
-        <div class="router-main">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</div> -->
-<!-- 
-<div class="container" [class.app-with-sidebar-expanded]="sidebarExpanded">
-    <div class="header-div">
-        <app-header></app-header>
-    </div>
-    <div class="body-container">
-        <app-sidebar (expandedChange)="sidebarExpanded = $event"></app-sidebar>
-
-        <div class="router-main" [class.expanded]="sidebarExpanded">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-</div> -->
-
 <div class="app-root" [class.sidebar-open]="sidebarExpanded">
     <app-header *ngIf="!isAuthRoute"></app-header>
     <div class="body-container">

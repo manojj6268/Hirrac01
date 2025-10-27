@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CandidateSearchComponent } from './candidate-search/candidate-search.component';
-import { AdvancedSearchFiltersComponent } from './advanced-search-filters/advanced-search-filters.component';
-import { CandidateResultsComponent } from './candidate-result/candidate-result.component';
 import { CandidateDetailsComponent } from './candidate-details/candidate-details.component';
+import { CandidateSearchComponent } from './candidate-search/candidate-search.component';
 
 const routes: Routes = [
-  { path: '', component: CandidateSearchComponent },
-  { path: 'advanced-filters', component: AdvancedSearchFiltersComponent },
-  { path: 'result', component: CandidateResultsComponent },
-  { path: 'details', component: CandidateDetailsComponent },
+  // Landing page when "Search Candidate" is clicked from sidebar
+  { path: '', component: CandidateDetailsComponent },
+
+  // Page that shows the actual search result UI (Figma layout)
+  { path: 'search', component: CandidateSearchComponent },
+
+  // Optional advanced search filters section
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class SearchCandidateRoutingModule { }
+export class SearchCandidateRoutingModule {}
