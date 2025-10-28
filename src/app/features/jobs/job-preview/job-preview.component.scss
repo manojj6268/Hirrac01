@@ -1,27 +1,20 @@
 // Job Preview Modal - Exact Match to Screenshot
 .preview-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  z-index: 1000;
-  max-width: 1200px;
-  margin: 20px auto;
-  height: calc(100vh - 40px);
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 // Modal Header
 .modal-header {
-  background: #1e40af;
-  color: white;
-  padding: 16px 24px;
+  background: #053997;
+  color: #ffffff;
+  padding: 10px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,16 +22,16 @@
   .header-left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     
     .preview-icon {
-      width: 20px;
-      height: 20px;
-      stroke: white;
+      width: 18px;
+      height: 18px;
+      stroke: #ffffff;
     }
     
     .preview-text {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 600;
     }
   }
@@ -46,32 +39,27 @@
   .close-button {
     background: none;
     border: none;
-    color: white;
+    color: #ffffff;
     cursor: pointer;
-    padding: 4px;
+    padding: 4px 0;
     border-radius: 4px;
     transition: background-color 0.2s ease;
     
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: transparent;
     }
-    
-    .close-icon {
-      width: 20px;
-      height: 20px;
-      stroke: white;
-    }
+    .close-text { font-size: 13px; font-weight: 400; }
   }
 }
 
 // Job Summary Bar
 .job-summary-bar {
-  background: #dbeafe;
-  padding: 16px 24px;
+  background: #ffffff;
+  padding: 12px 18px;
   
   .summary-content {
     display: flex;
-    gap: 32px;
+    gap: 28px;
     align-items: center;
     
     .job-title,
@@ -79,14 +67,15 @@
     .job-date {
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: #1e40af;
-      font-weight: 500;
+      gap: 6px;
+      color: #053997;
+      font-weight: 600;
+      font-size: 13px;
       
       svg {
-        width: 16px;
-        height: 16px;
-        stroke: #1e40af;
+        width: 14px;
+        height: 14px;
+        stroke: #053997;
       }
     }
   }
@@ -95,61 +84,84 @@
 // Modal Content
 .modal-content {
   flex: 1;
-  background: #f8fafc;
-  padding: 24px;
+  background: #ffffff;
+  padding: 16px 18px 18px;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 24px;
+  gap: 16px;
   overflow-y: auto;
+}
+
+/* Left column stack spacing */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* space between Job Description and Benefits */
 }
 
 // Content Cards
 .content-card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #EAF2FF;
+  border-radius: 10px;
+  box-shadow: none;
   overflow: hidden;
   
   .card-header {
-    background: #f8fafc;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e5e7eb;
+    background: transparent;
+    padding: 12px 16px 8px;
+    border-bottom: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     
     .card-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
-      color: #1e40af;
+      color: #053997;
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     
     .edit-icon {
-      width: 16px;
-      height: 16px;
-      stroke: #6b7280;
+      width: 14px;
+      height: 14px;
+      stroke: #991B1B;
       cursor: pointer;
       transition: stroke 0.2s ease;
       
       &:hover {
-        stroke: #1e40af;
+        stroke: #7a1515;
       }
     }
   }
   
   .card-content {
-    padding: 20px;
+    padding: 0 16px 16px;
     
     p {
-      color: #374151;
-      line-height: 1.6;
+      color: #1f2937;
+      line-height: 1.5;
       margin: 0;
-      font-size: 14px;
+      font-size: 13px;
     }
   }
+}
+
+/* Only Job Description card inner padding override */
+.content-card.job-description {
+  background: #F2F7FF;
+  .card-content { padding: 0 24px 24px; }
+  .edit-icon { stroke: #991B1B; }
+}
+
+/* Benefits card overrides */
+.content-card.job-benefits {
+  background: #F2F7FF;
+  padding: 25px;
+  .edit-icon { stroke: #991B1B; }
+  .card-content { padding: 10px 20px 20px; }
+  .benefits-tags { margin-top: 6px; }
 }
 
 // Benefits Tags
@@ -160,21 +172,32 @@
 }
 
 .benefit-tag {
-  background: #1e40af;
-  color: white;
+  background: #C9DCFF;
+  color: #053997;
   padding: 6px 12px;
   border-radius: 20px;
+  border: 1px solid #D3D3D3;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   display: flex;
   align-items: center;
   gap: 6px;
-  
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
   .dash-icon {
-    width: 12px;
-    height: 12px;
-    stroke: white;
+    width: 10px;
+    height: 10px;
+    stroke: #053997;
     stroke-width: 3;
+  }
+
+  &.selected {
+    background: #D3D3D3;
+    color: #000000;
+    border-color: #D3D3D3;
+    
+    .dash-icon { stroke: #000000; }
   }
 }
 
@@ -189,8 +212,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(5,57,151,0.08);
   
   &:last-child {
     border-bottom: none;
@@ -198,32 +221,32 @@
   }
   
   .detail-label {
-    font-size: 14px;
+    font-size: 12px;
     color: #6b7280;
-    font-weight: 500;
+    font-weight: 600;
     flex: 1;
   }
   
   .detail-value {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     
     span {
-      font-size: 14px;
+      font-size: 13px;
       color: #1f2937;
-      font-weight: 500;
+      font-weight: 600;
     }
     
     .edit-icon {
-      width: 14px;
-      height: 14px;
+      width: 12px;
+      height: 12px;
       stroke: #6b7280;
       cursor: pointer;
       transition: stroke 0.2s ease;
       
       &:hover {
-        stroke: #1e40af;
+        stroke: #053997;
       }
     }
   }
@@ -231,25 +254,25 @@
 
 // Modal Footer
 .modal-footer {
-  background: white;
-  padding: 20px 24px;
-  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 12px 18px 18px;
+  border-top: none;
   display: flex;
   justify-content: flex-end;
   
   .confirm-button {
-    background: #1e40af;
-    color: white;
+    background: #053997;
+    color: #ffffff;
     border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s ease;
     
     &:hover {
-      background: #1d4ed8;
+      background: #0940a2;
     }
   }
 }

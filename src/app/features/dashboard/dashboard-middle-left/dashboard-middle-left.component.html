@@ -14,12 +14,16 @@
     <ng-container *ngFor="let j of jobs">
       <div class="table-row">
         <div class="job-title">{{ j.title }}</div>
-        <div class="stat-cell applications">{{ j.applications }}</div>
-        <div class="stat-cell shortlisted">{{ j.shortlisted }}</div>
-        <div class="stat-cell interview">{{ j.interview }}</div>
-        <div class="stat-cell hired">{{ j.hired | number:'2.0' }}</div>
-        <div class="stat-cell rejected">{{ j.rejected }}</div>
+        <div class="stat-cell applications" style="background-color: #FDE2B4; color: #F59E0B;">{{ j.applications }}</div>
+        <div class="stat-cell shortlisted" style="background-color: #C6FBE5;color: #3DA262;">{{ j.shortlisted }}</div>
+        <div class="stat-cell interview" style="background-color: #C1D3FB;color: #2563EB;">{{ j.interview }}</div>
+        <div class="stat-cell hired" style="background-color: #A5C5BC;color: #065F46;">{{ j.hired | number:'2.0' }}</div>
+        <div class="stat-cell rejected" style="background-color: #DBACAC; color: #991B1B;">{{ j.rejected }}</div>
       </div>
     </ng-container>
   </div>
-</div>
+
+
+
+
+

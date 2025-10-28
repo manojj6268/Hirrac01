@@ -13,28 +13,36 @@
     margin: 0 0 20px 0;
   }
   
-  .cards-grid {
+  .summary-cards .cards-grid {
     display: grid;
     /* two columns and three rows (keeps layout similar to your design) */
-    grid-template-columns: 1fr 1fr;
+    /* make cards a bit narrower on desktop */
+    grid-template-columns: 180px 180px !important;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 16px;
     margin-top: 20px;
+    justify-content: center;
   }
   
-  .summary-card {
+  .summary-cards .cards-grid .summary-card {
     display: flex;
     flex-direction: row;
     align-items: center;
     text-align: left;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 20px;
+    border-radius: 5px;
     background: #f8fafc;
     border: 1px solid #e5e7eb;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    min-width: 100px;
-    max-width: 100%;
+    width: 100% !important; /* fill the 180px track */
   }
+  
+  .summary-card.posted-jobs { background-color: #E8F0FF; }
+  .summary-card.applications { background-color: #FFF3DE; }
+  .summary-card.shortlisted { background-color: #E3FEF3; }
+  .summary-card.interview { background-color: #E8EFFF; }
+  .summary-card.hired { background-color: #065F4633; }
+  .summary-card.rejected { background-color: #991B1B33; }
   
   .summary-card:hover {
     transform: translateY(-2px);
@@ -52,16 +60,16 @@
     flex-shrink: 0;
   }
   
-  .card-icon.posted-jobs { background: #3b82f6; }
-  .card-icon.applications { background: #fbbf24; }
-  .card-icon.shortlisted { background: #10b981; }
-  .card-icon.interview { background: #3b82f6; }
-  .card-icon.hired { background: #059669; }
-  .card-icon.rejected { background: #ef4444; }
+  .card-icon.posted-jobs { background-color: #E8F0FF;}
+  .card-icon.applications { background-color: #FFF3DE; }
+  .card-icon.shortlisted { background-color: #E3FEF3;}
+  .card-icon.interview {background-color: #E8EFFF;}
+  .card-icon.hired { background-color: #065F4633;}
+  .card-icon.rejected {background: #991B1B33;}
   
   .card-icon-image {
     width: 18px;
-    height: 18px;
+    height: 25px;
     object-fit: contain;
   }
   
@@ -92,8 +100,11 @@
   }
   
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .cards-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .summary-card { width: auto; min-width: 0; max-width: 100%; }
+  }
+  @media (max-width: 480px) {
+    .cards-grid { grid-template-columns: 1fr; }
     .summary-card { padding: 10px; }
   }
-  

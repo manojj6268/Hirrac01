@@ -1,36 +1,3 @@
-<!-- <div class="dashboard-profile-container">
-    <h1>Greetings</h1>
-    <div class="cards-row">
-        <div class="summary-cards">
-            <div class="cards-grid">
-                <ng-container *ngFor="let c of cards">
-                    <div class="summary-card">
-                        <div class="card-icon" [ngClass]="c.cssClass">
-                            <img *ngIf="c.icon" [src]="c.icon" alt="{{c.label}}" class="card-icon-image" />
-                        </div>
-                        <div class="card-content">
-                            <div class="card-number">{{ c.value }}</div>
-                            <div class="card-label">{{ c.label }}</div>
-                        </div>
-                    </div>
-                </ng-container>
-            </div>
-        </div>
-
-    </div>
-    <div class="job-InterviewsContainer">
-        <div class="Activjob-container">
-            <app-dashboard-middle-left></app-dashboard-middle-left>
-        </div>
-        <div class="interview-container">
-            <app-dashboard-bottom-right></app-dashboard-bottom-right>
-        </div>
-    </div>
-    <div class="recent-search-container">
-        <app-dashboard-botom-left></app-dashboard-botom-left>  
-    </div>
-</div> -->
-
 <div class="dashboard-profile-container" role="region" aria-label="Dashboard profile container">
     <header class="dashboard-header" role="banner" aria-label="Greeting header">
         <h1 class="greeting">{{ greeting }}</h1>
@@ -47,6 +14,7 @@
               [attr.aria-label]="c.label + ' - ' + c.value"
               [attr.data-testid]="'summary-' + i"
               tabindex="0"
+              [ngClass]="c.cssClass"
             >
               <div class="card-icon" [ngClass]="c.cssClass" aria-hidden="true">
                 <img *ngIf="c.icon" [src]="c.icon" [alt]="c.label + ' icon'"/>
@@ -65,19 +33,90 @@
     <!-- Middle area: Active Jobs (flexible) + Interviews (fixed) -->
     <section class="job-InterviewsContainer" role="region" aria-label="Active jobs and interviews">
       <div class="Activjob-container" role="region" aria-label="Active jobs">
-        <!-- Placeholder child component: left middle area -->
-        <app-dashboard-middle-left></app-dashboard-middle-left>
+        <div class="panel-header">
+          <h2>Active Jobs</h2>
+          <a href="javascript:void(0)" class="view-all" aria-label="View all active jobs">View All</a>
+        </div>
+        <div class="jobs-table" role="table" aria-label="Active jobs table">
+          <div class="jobs-header job-header" role="row">
+            <div class="col-title" role="columnheader" aria-label="Job title">&nbsp;</div>
+            <div class="col" *ngFor="let col of activeJobsColumns" role="columnheader">{{ col }}</div>
+          </div>
+          <div class="jobs-row" role="row" *ngFor="let row of activeJobs">
+            <div class="col-title" role="cell">{{ row.title }}</div>
+            <div class="col" role="cell"><span class="pill pill-applications">{{ row.Applications | number:'2.0' }}</span></div>
+            <div class="col" role="cell"><span class="pill pill-shortlisted">{{ row.Shortlisted | number:'2.0' }}</span></div>
+            <div class="col" role="cell"><span class="pill pill-interview">{{ row.Interview | number:'2.0' }}</span></div>
+            <div class="col" role="cell"><span class="pill pill-hired">{{ row.Hired | number:'2.0' }}</span></div>
+            <div class="col" role="cell"><span class="pill pill-rejected">{{ row.Rejected | number:'2.0' }}</span></div>
+          </div>
+        </div>
       </div>
   
       <aside class="interview-container" role="region" aria-label="Interviews">
-        <!-- Placeholder child component: right fixed interviews area -->
-        <app-dashboard-bottom-right></app-dashboard-bottom-right>
+        <div class="panel-header">
+          <h2>Interviews</h2>
+          <a href="javascript:void(0)" class="view-all" aria-label="View all interviews">View All</a>
+        </div>
+        <div class="interviews-section" *ngIf="interviews.today.length">
+          <div class="subheading">Today</div>
+          <ul class="interview-list">
+            <li class="interview-item" *ngFor="let i of interviews.today">
+              <div class="avatar" aria-hidden="true">{{ i.initials }}</div>
+              <div class="info">
+                <div class="name">{{ i.name }}</div>
+                <div class="role">{{ i.role }}</div>
+              </div>
+              <span class="mode" [ngClass]="i.mode === 'Phone' ? 'mode-phone' : 'mode-inperson'">{{ i.mode }}</span>
+              <time class="time">{{ i.time }}</time>
+            </li>
+          </ul>
+        </div>
+        <div class="interviews-section" *ngIf="interviews.tomorrow.length">
+          <div class="subheading">Tomorrow</div>
+          <ul class="interview-list">
+            <li class="interview-item" *ngFor="let i of interviews.tomorrow">
+              <div class="avatar" aria-hidden="true">{{ i.initials }}</div>
+              <div class="info">
+                <div class="name">{{ i.name }}</div>
+                <div class="role">{{ i.role }}</div>
+              </div>
+              <span class="mode" [ngClass]="i.mode === 'Phone' ? 'mode-phone' : 'mode-inperson'">{{ i.mode }}</span>
+              <time class="time">{{ i.time }}</time>
+            </li>
+          </ul>
+        </div>
       </aside>
     </section>
   
     <!-- Bottom band: Recently Searched -->
     <footer class="recent-search-container" role="region" aria-label="Recently searched">
-      <app-dashboard-botom-left></app-dashboard-botom-left>
+      <div class="panel-header">
+        <h2>Recently Searched</h2>
+      </div>
+      <div class="recent-divider" aria-hidden="true"></div>
+      <div class="recent-table" role="table" aria-label="Recently searched table">
+        <div class="recent-row recent-header" role="row">
+          <div class="recent-col icon" role="presentation">&nbsp;</div>
+          <div class="recent-col title th" role="columnheader">Title</div>
+          <div class="recent-col location th" role="columnheader">Location</div>
+          <div class="recent-col criteria th" role="columnheader">Search Criteria</div>
+          <div class="recent-col age th" role="columnheader">&nbsp;</div>
+        </div>
+        <div class="recent-row" role="row" *ngFor="let r of recentSearches">
+          <div class="recent-col icon" role="cell">
+            <span class="search-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="7" stroke="#2563EB" stroke-width="2"/>
+                <line x1="16.65" y1="16.65" x2="22" y2="22" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+          </div>
+          <div class="recent-col title" role="cell"><a href="javascript:void(0)">{{ r.title }}</a></div>
+          <div class="recent-col location" role="cell">{{ r.location }}</div>
+          <div class="recent-col criteria" role="cell">{{ r.criteria }}, <a href="javascript:void(0)">&amp; 5 more...</a></div>
+          <div class="recent-col age" role="cell">{{ r.age }}</div>
+        </div>
+      </div>
     </footer>
 </div>
-  

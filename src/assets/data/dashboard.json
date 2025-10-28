@@ -1,11 +1,11 @@
 {
   "summary": [
-    {  "label": "Posted Jobs", "value": 50 },
-    {  "label": "Applications", "value": 150 },
-    {  "label": "Shortlisted", "value": 100 },
-    {  "label": "Interview", "value": 50 },
-    {  "label": "Hired", "value": 2 },
-    {   "label": "Rejected", "value": 50 }
+    {  "label": "Posted Jobs", "value": 50, "color":"#991B1B33","background-color":"#E8F0FF"},
+    {  "label": "Applications", "value": 150, "color":"#F59E0B","background-color": "#FFF3DE"},
+    {  "label": "Shortlisted", "value": 100 ,"color":"#3DA262","background-color": "#E3FEF3"},
+    {  "label": "Interview", "value": 50 ,"color":"#2563EB","background-color": "#E8EFFF"},
+    {  "label": "Hired", "value": 2 ,"color":"#065F46","background-color": "#065F4633"},
+    {   "label": "Rejected", "value": 50 ,"color":"#991B1B","background-color": "#991B1B33" }
   ],
   "jobs": [
     { "title": "Product Designer", "applications": 65, "shortlisted": 50, "interview": 30, "hired": 0, "rejected": 20 },
@@ -28,6 +28,7 @@
     "criteria": "UI Design, Interaction design, UX basics",
     "timeAgo": "4d ago"
   }
+
 }
 
 

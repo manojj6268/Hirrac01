@@ -10,10 +10,7 @@
       <span class="preview-text">Preview</span>
     </div>
     <button class="close-button" (click)="onClose()">
-      <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
+      <span class="close-text">Close</span>
     </button>
   </div>
 
@@ -51,7 +48,7 @@
     <!-- Left Column -->
     <div class="left-column">
       <!-- Job Description Card -->
-      <div class="content-card">
+      <div class="content-card job-description">
         <div class="card-header">
           <h3 class="card-title">JOB DESCRIPTION</h3>
           <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -65,7 +62,7 @@
       </div>
 
       <!-- Benefits Card -->
-      <div class="content-card">
+      <div class="content-card job-benefits">
         <div class="card-header">
           <h3 class="card-title">BENEFITS</h3>
           <svg class="edit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -75,25 +72,25 @@
         </div>
         <div class="card-content">
           <div class="benefits-tags">
-            <div class="benefit-tag">
+            <div class="benefit-tag" (click)="toggleBenefit($event)">
               <svg class="dash-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"/>
               </svg>
               <span>Health insurance</span>
             </div>
-            <div class="benefit-tag">
+            <div class="benefit-tag" (click)="toggleBenefit($event)">
               <svg class="dash-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"/>
               </svg>
               <span>Provident Fund</span>
             </div>
-            <div class="benefit-tag">
+            <div class="benefit-tag" (click)="toggleBenefit($event)">
               <svg class="dash-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"/>
               </svg>
               <span>Cell phone reimbursment</span>
             </div>
-            <div class="benefit-tag">
+            <div class="benefit-tag" (click)="toggleBenefit($event)">
               <svg class="dash-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"/>
               </svg>

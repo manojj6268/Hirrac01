@@ -1,0 +1,59 @@
+<div class="app-shell">
+  <!-- Sidebar -->
+  <aside class="sidebar" aria-label="Profile navigation">
+    <div class="sidebar-inner">
+      <h2 class="sidebar-title">{{ title }}</h2>
+
+      <nav class="sidenav" aria-label="Profile settings">
+        <ul>
+          <li *ngFor="let item of navItems">
+            <button
+              class="nav-btn"
+              [class.active]="activeKey === item.key"
+              (click)="setActive(item.key)"
+              type="button"
+            >
+              <span class="nav-icon" aria-hidden="true">{{ item.icon }}</span>
+              <span class="nav-label">{{ item.label }}</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Company Settings</p>
+      </div>
+    </div>
+  </aside>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <main class="content">
+    <div class="content-inner">
+      <h1 class="page-heading">FAQs</h1>
+
+      <article class="faq-card">
+        <div class="faq-number">1.</div>
+        <div class="faq-body">
+          <h4 class="faq-title">
+            placerat tempor vitae enim. Nullam enim. tincidunt ex felis, quis laoreet massa tincidunt turpis Nunc elit.
+          </h4>
+          <p class="muted">
+            Nunc quis placerat tincidunt sollicitudin. viverra nibh malesuada Morbi eget ipsum Quisque at, cursus Praesent gravida tincidunt Cras ex convallis.
+            id tincidunt turpis lorem. dui eu at vitae commodo non lobortis, lorem, ex. Nam at, Nam ex
+          </p>
+        </div>
+      </article>
+
+      <h3 class="section-heading">Contact Support</h3>
+ 
+
+      <h3 class="section-heading-feedback">Feedback</h3>
+      <p class="muted">
+        “We welcome your feedback and inquiries at
+        <a href="mailto:info&#64;gmail.com" class="email-link">info&#64;gmail.com</a>”
+      </p>
+    </div>
+  </main>
+</div>

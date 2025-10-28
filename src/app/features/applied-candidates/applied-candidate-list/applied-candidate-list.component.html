@@ -1,0 +1,629 @@
+<div class="candidates-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <h1 class="page-title">Candidates</h1>
+  </div>
+
+  <!-- Filter Section -->
+  <!-- Filter / Bulk toolbar switched via ngSwitch on isHeaderChecked -->
+  <div class="filter-section">
+    <div [ngSwitch]="isHeaderChecked" class="filter-row">
+
+      <!-- DEFAULT: Filter-->
+      <div *ngSwitchDefault class="filter-row">
+        <!-- Title Dropdown -->
+        <div class="filter-item">
+          <select [(ngModel)]="titleFilter" class="filter-select">
+            <option value="">Title</option>
+            <option value="ui-designer">UI Designer</option>
+            <option value="ux-designer">UX Designer</option>
+            <option value="full-stack">Full Stack</option>
+          </select>
+          <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        <!-- Location Dropdown -->
+        <div class="filter-item">
+          <select [(ngModel)]="locationFilter" class="filter-select">
+            <option value="">Location</option>
+            <option value="new-york">New York</option>
+            <option value="los-angeles">Los Angeles</option>
+            <option value="chicago">Chicago</option>
+          </select>
+          <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        <!-- Status Dropdown -->
+        <div class="filter-item">
+          <select [(ngModel)]="statusFilter" class="filter-select">
+            <option value="">Status</option>
+            <option value="shortlisted">Shortlisted</option>
+            <option value="interview">Interview</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+
+        <!-- Search Input -->
+        <div class="filter-item">
+          <input type="text" [(ngModel)]="searchQuery" placeholder="Search candidate Name" class="search-input" />
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+
+        <!-- Search Button -->
+        <button class="search-button" (click)="onSearch()">Search</button>
+      </div>
+      <!-- END Default filter toolbar -->
+
+      <!-- BULK ACTIONS: shown when isHeaderChecked === true (Image 2) -->
+      <div *ngSwitchCase="true" class="filter-row" style="align-items:center;">
+        <!-- Selected count (update dynamically from selectedCount) -->
+        <div class="filter-item" style="flex: 0 0 auto; font-weight:400; font-size: 13px; color: #7C7C82;">
+          Selected ({{ selectedCount }})
+        </div>
+
+        <!-- Set Status -->
+        <div class="filter-item" style="flex: 1 1 auto; min-width: 180px;">
+          <select class="filter-select" (change)="onBulkSetStatus($any($event.target).value)">
+            <option value="">Set Status</option>
+            <option value="shortlisted">Shortlisted</option>
+            <option value="Interview...">Interview...</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+
+        <!-- clear All -->
+        <button class="search-button" (click)="onBulkSendMessage()" 
+         style="background:#FFFFFF; color:#262630; margin-left:8px; border-radius: 5px;">
+          Clear All
+        </button>
+        <!-- Send Message -->
+        <button class="search-button" (click)="onBulkSendMessage()" 
+        style="background:#FFFFFF; margin-left:8px; color: #10b981; border-radius: 5px;">
+          Send Message
+        </button>
+        
+        <!-- Download -->
+        <button class="search-button" (click)="onBulkDownload()"
+          style="background:#FFFFFF; color:#053997; margin-left:8px; border-radius: 5px;">
+          Download
+        </button>
+
+        <!-- Delete -->
+        <button class="search-button" (click)="onBulkDelete()"
+          style="background:#FFFFFF; color:#ED1825; margin-left:8px; border-radius: 5px;">
+          Delete
+        </button>
+      </div>
+      <!-- END Bulk toolbar -->
+
+    </div>
+  </div>
+  <!-- ===== END replacement ===== -->
+
+  <!-- Table Section -->
+  <div class="table-wrapper">
+    <table class="candidates-table">
+      <thead>
+        <tr class="table-header">
+          <th class="checkbox-col">
+            <!-- header checkbox now toggles isHeaderChecked and triggers select-all behavior -->
+            <input type="checkbox" [checked]="isHeaderChecked" (change)="toggleHeaderCheckbox()" />
+          </th>
+          <th class="candidate-col">Candidate</th>
+          <th class="experience-col">Experience</th>
+          <th class="skills-col">Top Skills</th>
+          <th class="actions-col">Actions</th>
+          <th class="more-col">More</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of candidates" class="table-row" (click)="onRowClick(candidate)">
+          <td class="checkbox-col">
+            <input type="checkbox" [(ngModel)]="candidate.selected" />
+          </td>
+          <td class="candidate-col">
+            <div class="candidate-info">
+              <!-- Avatar and name side by side -->
+              <div class="avatar">{{ candidate.avatar }}</div>
+              <div class="candidate-details">
+                <!-- <CHANGE> Name displayed first -->
+                <div class="candidate-name">{{ candidate.name }}</div>
+                <!-- <CHANGE> Location displayed below name -->
+                <div class="candidate-location">📍 {{ candidate.location }}</div>
+                <!-- <CHANGE> Day indicator displayed below location -->
+                <div class="candidate-time">📅 Today</div>
+              </div>
+            </div>
+          </td>
+          <td class="experience-col">
+            <div class="experience-info">
+              <div class="experience-title">👤 {{ candidate.experience }}</div>
+              <div class="experience-years">📊 {{ candidate.years }}</div>
+            </div>
+          </td>
+          <td class="skills-col">
+            <div class="skills-list">
+              <span *ngFor="let skill of candidate.skills" class="skill-badge">{{ skill }}</span>
+            </div>
+          </td>
+          <td class="actions-col">
+            <div class="status-select-wrapper"> <!-- ← NEW WRAPPER -->
+              <select [(ngModel)]="candidate.status" class="status-select" [ngClass]="getStatusClass(candidate.status)">
+                <option value="Status">Status</option>
+                <option value="shortlisted">shortlisted</option>
+                <option value="Interview...">Interview...</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+              <!-- <CHANGE> Added SVG dropdown icon inside wrapper -->
+              <svg class="status-dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </td>
+          <td class="more-col">
+            <div class="more-menu">
+              <button class="more-button" (click)="toggleDropdown(candidate.id)">⋮</button>
+              <div *ngIf="openDropdownId === candidate.id" class="dropdown-menu">
+                <button class="dropdown-item view" (click)="onView(candidate)">
+                  👁️ View
+                </button>
+                <button class="dropdown-item download" (click)="onDownload(candidate)">
+                  ⬇️ Download
+                </button>
+                <button class="dropdown-item delete" (click)="onDelete(candidate)">
+                  🗑️ Delete
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <span class="pagination-text">1 - 20 of 40+</span>
+    <div class="pagination-controls">
+      <button class="pagination-btn">❮</button>
+      <button class="pagination-btn">❯</button>
+    </div>
+    <select class="rows-select">
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+    </select>
+  </div>
+
+  <!-- Inline Modal -->
+  <div *ngIf="isModalOpen" class="modal-overlay" (click)="onCloseModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <!-- Modal Header -->
+      <!-- <CHANGE> Updated modal header with star button and improved layout -->
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="modal-avatar">{{ selectedCandidate?.avatar }}</div>
+          <div class="modal-header-info">
+            <h2 class="modal-title">{{ selectedCandidate?.name }}</h2>
+            <p class="modal-subtitle">UI/UX Designer</p>
+          </div>
+        </div>
+        <!-- <CHANGE> Added star button and close button in header-right -->
+        <div class="modal-header-right">
+          <button class="star-btn" (click)="onToggleStar()">⭐</button>
+          <button class="modal-close" (click)="onCloseModal()">✕</button>
+        </div>
+      </div>
+
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <!-- Left Sidebar -->
+        <div class="modal-sidebar">
+          <div class="sidebar-section">
+            <h3 class="sidebar-title">CANDIDATE DETAILS</h3>
+            <div class="details-item-container">
+              <div class="detail-item">
+                <span class="detail-label">💼 Job</span>
+                <p class="detail-value">UI/UX Designer at Abilio IT Solutions</p>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">📍 Location</span>
+                <p class="detail-value">Madhapur, Hyderabad</p>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">📧 Email</span>
+                <div class="detail-value-with-icon">
+                  <p class="detail-value">ben_alter&#64;hotmail.com</p>
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">📞 Phone</span>
+                <div class="detail-value-with-icon">
+                  <p class="detail-value">+1-970-333-3833</p>
+                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">Status</span>
+                <div class="status-icons">
+                  <button class="status-icon-btn check">✓</button>
+                  <button class="status-icon-btn cross">✕</button>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="sidebar-actions">
+                <button class="action-btn interview-btn" (click)="onCreateInterview()">
+                  <i class="icon-calendar"></i>📅 Create an Interview
+                </button>
+                <button class="action-btn message-btn">
+                  💬 Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content -->
+        <div class="modal-main">
+          <!-- Tabs -->
+          <div class="modal-tabs">
+            <button class="tab-btn" [class.active]="activeTab === 'resume'" (click)="activeTab = 'resume'">RESUME
+            </button>
+            <!-- <CHANGE> Added VIDEO INTRO tab with video icon -->
+            <button class="tab-btn video-tab" [class.active]="activeTab === 'video'" (click)="activeTab = 'video'">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+              VIDEO INTRO
+            </button>
+            <!-- <CHANGE> Added Download button with click handler -->
+            <button class="download-btn" (click)="onDownloadResume()" title="Download resume">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download
+            </button>
+          </div>
+
+          <!-- Resume Content -->
+          <div *ngIf="activeTab === 'resume'" class="resume-content">
+            <div class="resume-profile">
+              <div class="resume-avatar">MW</div>
+              <div class="resume-info">
+                <h3 class="resume-name">Marcus Walsman</h3>
+                <p class="resume-title">UI/UX Designer</p>
+              </div>
+            </div>
+
+            <div class="resume-section">
+              <h4 class="resume-section-title">PROFILE</h4>
+              <p class="resume-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+            </div>
+
+            <div class="resume-section">
+              <h4 class="resume-section-title">EXPERIENCE</h4>
+              <p class="resume-text">
+                <strong>Senior UI/UX Designer</strong> - Tech Company Inc. (2020-Present)
+              </p>
+            </div>
+          </div>
+
+          <!-- <CHANGE> Added video content section for VIDEO INTRO tab -->
+          <div *ngIf="activeTab === 'video'" class="video-content">
+            <div class="video-player" (click)="openVideoModal()">
+              <div class="video-thumbnail">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="white">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </div>
+              <div class="video-info">
+                <p class="video-time">00:00 / 01:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Added full-screen video modal overlay -->
+      <div *ngIf="isVideoModalOpen" class="video-modal-overlay" (click)="closeVideoModal()">
+        <div class="video-modal-content" (click)="$event.stopPropagation()">
+          <!-- Video Modal Header -->
+          <div class="video-modal-header">
+            <div class="video-modal-header-left">
+              <div class="video-modal-avatar">{{ selectedCandidate?.avatar }}</div>
+              <div class="video-modal-header-info">
+                <h2>{{ selectedCandidate?.name }}</h2>
+                <p>{{ selectedCandidate?.title }}</p>
+              </div>
+            </div>
+            <button class="video-modal-close" (click)="closeVideoModal()" title="Close">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor"
+                stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Video Modal Body -->
+          <div class="video-modal-body">
+            <!-- Tabs -->
+            <div class="video-modal-tabs">
+              <button class="video-modal-tab-btn">RESUME</button>
+              <button class="video-modal-tab-btn active">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                </svg>
+                VIDEO INTRO
+              </button>
+              <button class="video-modal-download-btn" (click)="onDownloadResume()" title="Download resume">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download
+              </button>
+            </div>
+
+            <!-- Video Player -->
+            <div class="video-modal-player-container">
+              <div class="video-modal-player">
+                <img src="/placeholder.svg?height=600&width=800" alt="Video Introduction" class="video-modal-image" />
+                <div class="video-modal-play-button">
+                  <svg width="80" height="80" viewBox="0 0 24 24" fill="white">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+                <div class="video-modal-time-display">
+                  <span class="video-modal-current-time">00:00</span>
+                  <span class="video-modal-duration">01:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Added inline interview scheduling modal -->
+    <div *ngIf="isInterviewModalOpen" class="interview-modal-overlay" (click)="onCloseInterviewModal()">
+      <div class="interview-modal-content" (click)="$event.stopPropagation()">
+        <!-- Interview Modal Header -->
+        <div class="interview-modal-header">
+          <div class="interview-modal-header-left">
+            <div class="interview-modal-avatar">{{ selectedCandidate?.avatar }}</div>
+            <div class="interview-modal-header-info">
+              <h2>{{ selectedCandidate?.name }}</h2>
+              <p>UI/UX Designer</p>
+            </div>
+          </div>
+          <button class="interview-modal-close" (click)="onCloseInterviewModal()">✕</button>
+        </div>
+
+        <!-- Interview Modal Body -->
+        <div class="interview-modal-body">
+          <!-- Left Sidebar -->
+          <div class="interview-modal-sidebar">
+            <h3 class="interview-sidebar-title">CANDIDATE DETAILS</h3>
+            <div class="interview-details-container">
+              <div class="interview-detail-item">
+                <span class="interview-detail-label">💼 Job</span>
+                <p class="interview-detail-value">UI/UX Designer at Abilio IT Solutions</p>
+              </div>
+
+              <div class="interview-detail-item">
+                <span class="interview-detail-label">📍 Location</span>
+                <p class="interview-detail-value">Madhapur, Hyderabad</p>
+              </div>
+
+              <div class="interview-detail-item">
+                <span class="interview-detail-label">📧 Email</span>
+                <div class="interview-detail-value-with-icon">
+                  <p class="interview-detail-value">ben_alter&#64;hotmail.com</p>
+                  <svg class="interview-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    (click)="onCopyEmail()">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="interview-detail-item">
+                <span class="interview-detail-label">📞 Phone</span>
+                <div class="interview-detail-value-with-icon">
+                  <p class="interview-detail-value">+1-970-333-3833</p>
+                  <svg class="interview-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    (click)="onCopyPhone()">
+                    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                  </svg>
+                </div>
+              </div>
+              <div class="interview-detail-item">
+                <span class="interview-detail-label">Status</span>
+                <div class="interview-status-icons">
+                  <button class="interview-status-icon-btn check" (click)="onStatusCheck()">✓</button>
+                  <button class="interview-status-icon-btn cross" (click)="onStatusCross()">✕</button>
+                </div>
+              </div>
+              <div class="interview-action">
+                <button class="interview-action create-interview">
+                  <i class="icon-calendar"></i>📅 Create an Interview
+                </button>
+                <button class="interview-action message-btn" (click)="onSendMessage()">
+                  💬 Message
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Form Section -->
+          <div class="interview-modal-form">
+            <h3 class="interview-form-title">Schedule with {{ selectedCandidate?.name }}</h3>
+
+            <!-- Duration -->
+            <div class="interview-form-group">
+              <label class="interview-form-label">Duration <span class="required">*</span></label>
+              <select [(ngModel)]="interviewForm.duration" class="interview-form-select">
+                <option value="">Select Duration</option>
+                <option value="15">15 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="45">45 minutes</option>
+                <option value="60">1 hour</option>
+              </select>
+            </div>
+
+            <!-- Format -->
+            <div class="interview-form-group">
+              <label class="interview-form-label">Format <span class="required">*</span></label>
+              <div class="interview-form-radio-group">
+                <label class="interview-radio-label">
+                  <input type="radio" name="format" value="phone" [(ngModel)]="interviewForm.format" />
+                  Phone
+                </label>
+                <label class="interview-radio-label">
+                  <input type="radio" name="format" value="in-person" [(ngModel)]="interviewForm.format" />
+                  In-person
+                </label>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="interview-form-group">
+              <label class="interview-form-label">Write a message <span class="required">*</span></label>
+              <textarea [(ngModel)]="interviewForm.message" class="interview-form-textarea"
+                placeholder="Enter your message here..."></textarea>
+            </div>
+
+            <!-- Date and Time Row -->
+            <div class="interview-form-row">
+              <div class="interview-form-group">
+                <label class="interview-form-label">Date <span class="required">*</span></label>
+                <input type="date" [(ngModel)]="interviewForm.date" class="interview-form-input" />
+              </div>
+
+              <div class="interview-form-group">
+                <label class="interview-form-label">Time <span class="required">*</span></label>
+                <input type="time" [(ngModel)]="interviewForm.time" class="interview-form-input" />
+              </div>
+            </div>
+
+            <!-- Time Zone -->
+            <div class="interview-form-group">
+              <label class="interview-form-label">Time Zone <span class="required">*</span></label>
+              <select [(ngModel)]="interviewForm.timeZone" class="interview-form-select">
+                <option value="">Select Time Zone</option>
+                <option value="EST">EST (Eastern Standard Time)</option>
+                <option value="CST">CST (Central Standard Time)</option>
+                <option value="MST">MST (Mountain Standard Time)</option>
+                <option value="PST">PST (Pacific Standard Time)</option>
+                <option value="IST">IST (Indian Standard Time)</option>
+              </select>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="interview-form-actions">
+              <button class="interview-btn-cancel" (click)="onCloseInterviewModal()">Cancel</button>
+              <button class="interview-btn-submit" (click)="onSendInterviewRequest()">Send Request</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Added message modal popup that opens on top of interview modal -->
+        <div *ngIf="isMessageModalOpen" class="message-modal-overlay" (click)="closeMessageModal()">
+          <div class="message-modal-container" (click)="$event.stopPropagation()">
+            <!-- Message Modal Header -->
+            <div class="message-modal-header">
+              <div class="message-header-content">
+                <div class="message-avatar">{{ selectedCandidate?.avatar }}</div>
+                <div class="message-header-info">
+                  <h4>{{ selectedCandidate?.name }}</h4>
+                  <p>{{ selectedCandidate?.title }}</p>
+                </div>
+              </div>
+              <div class="message-header-actions">
+                <button class="message-minimize-btn" title="Minimize">−</button>
+                <button class="message-close-btn" (click)="closeMessageModal()" title="Close">×</button>
+              </div>
+            </div>
+
+            <!-- <CHANGE> Chat History Area (middle section - empty space) -->
+            <div class="message-modal-chat-area">
+              <!-- Chat messages will display here -->
+            </div>
+            <!-- Message Input Area (moved to footer with textarea) -->
+            <div class="message-modal-footer">
+              <div class="message-input-section">
+                <div class="message-actions-left">
+                  <button class="message-action-btn" title="Attachment">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 0 19.8 4.3M22 12.5a10 10 0 0 0-19.8-4.2" />
+                    </svg>
+                  </button>
+                  <button class="message-action-btn" title="Image">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                      <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                      <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                  </button>
+                  <button class="message-action-btn" title="Calendar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <rect x="16" y="2" width="6" height="4"></rect>
+                      <rect x="2" y="2" width="6" height="4"></rect>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="message-input-wrapper">
+                  <span class="message-required">*</span>
+                  <input type="text" [(ngModel)]="messageText" class="message-input"
+                    placeholder="Type your message here..." />
+                </div>
+
+                <button class="message-send-btn" (click)="sendMessage()" title="Send">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16346272 C3.34915502,0.9 2.40734225,1.00636533 1.77946707,1.4776575 C0.994623095,2.10604706 0.837654326,3.0486314 1.15159189,3.99021575 L3.03521743,10.4311088 C3.03521743,10.5882061 3.34915502,10.7453035 3.50612381,10.7453035 L16.6915026,11.5307905 C16.6915026,11.5307905 17.1624089,11.5307905 17.1624089,12.0020827 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

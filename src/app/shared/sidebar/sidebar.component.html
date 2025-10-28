@@ -1,90 +1,72 @@
-<div class="sidebar" [class.collapsed]="isCollapsed" role="navigation" aria-label="Main sidebar">
+<div class="sidebar" [class.expanded]="isCollapsed" role="navigation" aria-label="Main sidebar">
+  <!-- Sidebar Header with collapse button -->
   <div class="sidebar-header">
-    <button type="button" class="collapse-btn" (click)="toggleCollapse()" title="Collapse / Expand"
+    <button type="button" class="collapse-button" (click)="toggleCollapse()" title="Collapse / Expand"
       [attr.aria-pressed]="isCollapsed">
-      <svg class="collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path *ngIf="!isCollapsed" d="M15 18l-6-6 6-6" />
-        <path *ngIf="isCollapsed" d="M9 6l6 6-6 6" />
+      <svg class="collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 18l6-6-6-6" />
       </svg>
     </button>
   </div>
+  <nav class="sidebar-content" aria-label="Main navigation">
+    <!-- Dashboard (keeps client-side toggle behavior) -->
+    <a class="nav-item" title="Dashboard"  routerLink="/dashboard-profile" routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }">
+      <img class="nav-icon" src="assets/images/dashboardIcon1.png" alt="Dashboard icon" />
+      <span class="nav-text">Dashboard</span>
+    </a>
 
-  <nav class="sidebar-nav" aria-label="Main navigation">
-    <ul class="nav-list">
-      <!-- Dashboard -->
-      <li class="nav-item" title="Dashboard">
-        <a class="nav-link" routerLink="/dashboard-profile" routerLinkActive="active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7" />
-            <rect x="14" y="3" width="7" height="7" />
-            <rect x="14" y="14" width="7" height="7" />
-            <rect x="3" y="14" width="7" height="7" />
-          </svg>
-          <span class="nav-text" [class.hidden]="isCollapsed">Dashboard</span>
-        </a>
-      </li>
+    <!-- Post a Job -->
+    <a class="nav-item" title="Post a Job" routerLink="/post-jobs" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="5" x2="12" y2="19" />
+        <line x1="5" y1="12" x2="19" y2="12" />
+      </svg>
+      <span class="nav-text">Post a Job</span>
+    </a>
 
-      <!-- Post a Job -->
-      <li class="nav-item" title="Post a Job">
-        <a class="nav-link" routerLink="/post-jobs" routerLinkActive="active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
-          <span class="nav-text" [class.hidden]="isCollapsed">Post a Job</span>
-        </a>
-      </li>
+    <!-- Jobs -->
+    <a class="nav-item" title="Jobs" routerLink="/jobs" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <img class="nav-icon" src="assets/images/dashboard-jobsIcon.png" alt="Jobs icon" />
+      <span class="nav-text">Jobs</span>
+    </a>
 
-      <!-- Jobs -->
-      <li class="nav-item" title="Jobs">
-        <a class="nav-link" routerLink="/jobs" routerLinkActive="active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-            <line x1="8" y1="21" x2="16" y2="21" />
-            <line x1="12" y1="17" x2="12" y2="21" />
-          </svg>
-          <span class="nav-text" [class.hidden]="isCollapsed">Jobs</span>
-        </a>
-      </li>
+    <!-- Search candidate -->
+    <a class="nav-item" title="Search candidate" routerLink="/search-candidate" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span class="nav-text">Search candidate</span>
+    </a>
 
-      <!-- Search candidate -->
-      <li class="nav-item" title="Search candidate">
-        <a class="nav-link" routerLink="/search-candidate" routerLinkActive="active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
-          <span class="nav-text" [class.hidden]="isCollapsed">Search candidate</span>
-        </a>
-      </li>
+    <!--Applied Candidates -->
+    <a class="nav-item" title="Applied Candidates" routerLink="/applied-candidate-list" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+      <span class="nav-text">Candidates</span>
+    </a>
 
-      <!-- Candidates -->
-      <li class="nav-item" title="Candidates">
-        <a class="nav-link" routerLink="/candidates" routerLinkActive="active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-          <span class="nav-text" [class.hidden]="isCollapsed">Candidates</span>
-        </a>
-      </li>
-
-      <!-- Interviews -->
-      <li class="nav-item" title="Interviews">
-        <a class="nav-link" routerLink="/interviews" routerLinkActive="active">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-            <line x1="16" y1="2" x2="16" y2="6" />
-            <line x1="8" y1="2" x2="8" y2="6" />
-            <line x1="3" y1="10" x2="21" y2="10" />
-            <line x1="12" y1="14" x2="12" y2="18" />
-            <line x1="8" y1="16" x2="16" y2="16" />
-          </svg>
-          <span class="nav-text" [class.hidden]="isCollapsed">Interviews</span>
-        </a>
-      </li>
-    </ul>
+    <!-- Interviews -->
+    <a class="nav-item" title="Interviews" routerLink="/interviews" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+        <line x1="16" y1="2" x2="16" y2="6" />
+        <line x1="8" y1="2" x2="8" y2="6" />
+        <line x1="3" y1="10" x2="21" y2="10" />
+        <line x1="12" y1="14" x2="12" y2="18" />
+        <line x1="8" y1="16" x2="16" y2="16" />
+      </svg>
+      <span class="nav-text">Interviews</span>
+    </a>
   </nav>
 </div>

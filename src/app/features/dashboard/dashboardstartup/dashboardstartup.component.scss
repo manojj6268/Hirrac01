@@ -1,7 +1,8 @@
 
  .content-container{
   display: flex;
-  justify-content: space-between;
+  gap: 30px;
+//   justify-content: space-between;
  }
  app-dashboard-left {
     width: 55%;

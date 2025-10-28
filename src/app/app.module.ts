@@ -13,10 +13,13 @@ import { MessagesModule } from './features/messages/messages.module';
 import { BillingModule } from './features/billing/billing.module';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AuthModule } from './features/auth/auth.module';
 import { ServiceModule } from './service/service.module';
 import { SearchCandidateModule } from './features/search-candidate/search-candidate.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AppliedCandidatesModule } from './features/applied-candidates/applied-candidates.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,7 @@ import { SearchCandidateModule } from './features/search-candidate/search-candid
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     SearchCandidateModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -36,10 +40,12 @@ import { SearchCandidateModule } from './features/search-candidate/search-candid
     MessagesModule,
     BillingModule,
     CommonModule,
-    SharedModule,
     ReactiveFormsModule,
     AuthModule,
     ServiceModule,
+    AppliedCandidatesModule,
+    FormsModule,
+    HttpClientModule,
 
   ],
   providers: [

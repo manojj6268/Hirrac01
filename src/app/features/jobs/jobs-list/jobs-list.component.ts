@@ -151,6 +151,16 @@ export class JobsListComponent implements OnInit {
     }
   }
 
+  // Header checkbox: select all and navigate to first job details
+  onSelectAllAndGo(e: Event) {
+    this.toggleSelectAll(e);
+    const checked = (e.target as HTMLInputElement).checked;
+    if (checked && this.jobs.length > 0) {
+      const firstId = this.jobs[0].id;
+      this.router.navigate(['/jobs/details', firstId]);
+    }
+  }
+
   toggleMenu(jobId: string, event: MouseEvent) {
     // stop propagation to avoid other row click handlers
     event.stopPropagation();
@@ -185,11 +195,10 @@ export class JobsListComponent implements OnInit {
   // Menu actions
   onView(job: Job, event?: MouseEvent) {
     if (event) event.stopPropagation();
-    // open modal preview (default)
+    // Open inline modal preview
+    this.closeMenu();
     this.selectedJob = job;
     this.isModalOpen = true;
-    this.closeMenu();
-    // focus trap / accessibility improvements can be added
   }
 
   onEdit(job: Job, event?: MouseEvent) {
@@ -222,4 +231,22 @@ export class JobsListComponent implements OnInit {
     alert(`Confirmed and posted job "${job.title}".`);
     this.closeModal();
   }
+
+  // Helper to fetch a job by id for context menu actions
+  getJobById(id: string): Job | undefined {
+    return this.jobs.find(j => j.id === id);
+  }
+
+  // Row click: open preview modal for job id
+  openPreviewById(id: string) {
+    const job = this.getJobById(id);
+    if (job) {
+      this.selectedJob = job;
+      this.isModalOpen = true;
+    }
+  }
+
+  
 }
+
+
